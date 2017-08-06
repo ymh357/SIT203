@@ -45,26 +45,98 @@
 	</style>
 
 	<script>
+		function showProducts(category){
+			var start=0;
+			var times=6;
+			switch(category){
+			case "menTShirt":
+				start=0;
+				times=5;
+				break;
+			case "menShirt":
+				start=5;
+				times=3;
+				break;
+			case "menPants":
+				start=8;
+				times=2;
+				break;
+			case "menAccessory":
+				start=10;
+				times=3;
+				break;
+			case "ladyTShirt":
+				start=13;
+				times=4;
+				break;
+			case "ladyShirt":
+				start=17;
+				times=5;
+				break;
+			case "ladyPants":
+				start=22;
+				times=3;
+				break;
+			case "ladyAccessory":
+				start=25;
+				times=3;
+				break;
+			case "men":
+				start=0;
+				times=6;
+				break;
+			case "lady":
+				start=13;
+				times=6;
+				break;
+			}
+			document.getElementById("products").innerHTML = "";
+			for(var i=start;times-->0;i++){						 
+					document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html"><img src="' 
+							 										+ (xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i).childNodes[0].nodeValue + '_1.jpg')
+							 										+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html"><img src="'
+							 										+ (xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i).childNodes[0].nodeValue + '_2.jpg')
+							 										+ '" alt="" class="img-responsive"></a></div></div></div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-responsive"></a><div class="text"><h3><a href="detail.html">'
+							 										+ xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue
+							 										+ '</a></h3><p class="price">'
+							 										+ 'AU$' + xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue
+							 										+ '</p><p class="buttons"><a href="detail.html" class="btn btn-default">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p></div></div></div>');
+				}  	
+			$("#"+category).addClass("btn default");
+		}
+		
+	
 		$(document).ready(function(){
 			xmlhttp=new XMLHttpRequest();
 			xmlhttp.onreadystatechange=function(){
 				 if ( xmlhttp.readyState == 4 && 
 			        	xmlhttp.status == 200 &&  xmlhttp.responseXML ){
-					 for(var i=13;i<19;i++){						 
-						document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html"><img src="' 
-								 										+ (xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i).childNodes[0].nodeValue + '_1.jpg')
-								 										+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html"><img src="'
-								 										+ (xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i).childNodes[0].nodeValue + '_2.jpg')
-								 										+ '" alt="" class="img-responsive"></a></div></div></div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-responsive"></a><div class="text"><h3><a href="detail.html">'
-								 										+ xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue
-								 										+ '</a></h3><p class="price">'
-								 										+ 'AU$' + xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue
-								 										+ '</p><p class="buttons"><a href="detail.html" class="btn btn-default">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p></div></div></div>');
-	 					 }
-					 }				 
+					 var category=document.location.hash.split("#")[1];
+					 if(!!category){
+						 showProducts(category);
+					 }else{
+						 showProducts("lady");	
+					 }
+				 }
 			}
 			xmlhttp.open("GET","products.xml",true);
 			xmlhttp.send();
+			
+			/* $("#applyBtn").click(function(){
+				document.location.reload();
+			}); */
+			$("#ladyTShirt").click(function(){
+				document.location.reload();
+			});
+			$("#ladyShirt").click(function(){
+				document.location.reload();
+			});
+			$("#ladyPants").click(function(){
+				document.location.reload();
+			});
+			$("#ladyAccessory").click(function(){
+				document.location.reload();
+			});
 		});
 	</script>
 
@@ -443,7 +515,7 @@
             <div class="container">
 
                 <div class="col-md-12">
-                    <ul class="breadcrumb">
+                    <ul class="breadcrumb" id="belongto">
                         <li><a href="index.html">Home</a>
                         </li>
                         <li>Ladies</li>
@@ -464,26 +536,26 @@
                                 <li>
                                     <a href="category-man.html">Men <span class="badge pull-right">12</span></a>
                                     <ul>
-                                        <li><a href="category-man.html">T-shirts</a>
+                                        <li><a href="category-man.html#menTShirt" id="menTShirt">T-shirts</a>
                                         </li>
-                                        <li><a href="category-man.html">Shirts</a>
+                                        <li><a href="category-man.html#menShirt" id="menShirt">Shirts</a>
                                         </li>
-                                        <li><a href="category-man.html">Pants</a>
+                                        <li><a href="category-man.html#menPants" id="menPants">Pants</a>
                                         </li>
-                                        <li><a href="category-man.html">Accessories</a>
+                                        <li><a href="category-man.html#menAccessory" id="menAccessory">Accessories</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="active">
                                     <a href="category-lady.html">Ladies  <span class="badge pull-right">12</span></a>
                                     <ul>
-                                        <li><a href="category-lady.html">T-shirts</a>
+                                        <li><a href="category-lady.html#ladyTShirt" id="ladyTShirt">T-shirts</a>
                                         </li>
-                                        <li><a href="category-lady.html">Shirts</a>
+                                        <li><a href="category-lady.html#ladyShirt" id="ladyShirt">Shirts</a>
                                         </li>
-                                        <li><a href="category-lady.html">Pants</a>
+                                        <li><a href="category-lady.html#ladyPants" id="ladyPants">Pants</a>
                                         </li>
-                                        <li><a href="category-lady.html">Accessories</a>
+                                        <li><a href="category-lady.html#ladyAccessory" id="ladyAccessory">Accessories</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -540,7 +612,7 @@
                                     </div>
                                 </div>
 
-                                <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                                <button class="btn btn-default btn-sm btn-primary" id="applyBtn"><i class="fa fa-pencil"></i> Apply</button>
 
                             </form>
 
@@ -596,7 +668,8 @@
 
                     <div class="row products" id="products">
 
-                       <!--  <div class="col-md-4 col-sm-6">
+                       <!--  
+                       <div class="col-md-4 col-sm-6">
                             <div class="product">
                                 <div class="flip-container">
                                     <div class="flipper">
@@ -823,7 +896,8 @@
                             /.product
                         </div>
                         /.col-md-4
-                    </div> -->
+                    </div> 
+                 	-->
                     <!-- /.products -->
 
                     <div class="pages">
