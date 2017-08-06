@@ -5,7 +5,7 @@
 			<T-shirt>
 				<name>Armani Jeans Crew Neck Gradient T Shirt White</name>
 				<price>70</price>
-				<picture></picture>
+				<picture>img/men_tshirt1</picture>
 				<brand>Armani</brand>
 				<detail>Armani Jeans Crew Neck Gradient T Shirt In White, A classic t shirt with a ribbed crew neckline and short sleeves. An overall dip dye effect gradient design in white and navy.</detail>
 				<material>100% Cotton</material>
@@ -16,7 +16,7 @@
 			<T-shirt>
 				<name> Armani Jeans Logo Crew Neck T Shirt Blue</name>
 				<price>50</price>
-				<picture></picture>
+				<picture>img/men_tshirt2</picture>
 				<brand>Armani</brand>
 				<detail>Armani Jeans Logo Crew Neck T Shirt In Night Blue, A ribbed crew neckline and short sleeves. A large signature Armani Jeans logo design is printed on the chest in blue and white.</detail>
 				<material>100% Cotton</material>
@@ -27,7 +27,7 @@
 			<T-shirt>
 				<name>Versace Jeans Logo T Shirt Blue</name>
 				<price>100</price>
-				<picture></picture>
+				<picture>img/men_tshirt3</picture>
 				<brand>Versace</brand>
 				<detail>Versace Jeans Logo T Shirt In Blue, Regular Fit. A classic cotton t shirt with a ribbed crew neck and short sleeves. The front of the body has repeated Versace Jeans logos printed in silver. Top stitching in blue.</detail>
 				<material>100% Cotton</material>
@@ -38,7 +38,7 @@
 			<T-shirt>
 				<name>Versace Jeans Printed T Shirt Green</name>
 				<price>150</price>
-				<picture></picture>
+				<picture>img/men_tshirt4</picture>
 				<brand>Versace</brand>
 				<detail>Versace Jeans Printed T Shirt In Turquoise Green, Slim Fit. Allover baroque and animal print in turquoise green, blue, black and yellow with a ribbed crew neck in black and short sleeves. A signature Versace Jeans logo is printed on the chest in black.</detail>
 				<material>95% Cotton And 5% Elastane</material>
@@ -49,7 +49,7 @@
 			<T-shirt>
 				<name>Columbian-fit Hawaii print T-shirt</name>
 				<price>1000</price>
-				<picture></picture>
+				<picture>img/men_tshirt5</picture>
 				<brand>Armani</brand>
 				<detail>This multicolour blue Hawaii print T-shirt depicts the image of a windswept sea and sinking ship.</detail>
 				<material>100% Cotton</material>
@@ -60,7 +60,7 @@
 			<shirt>
 				<name>Armani Collezioni Long Sleeved Check Shirt Navy</name>
 				<price>200</price>
-				<picture></picture>
+				<picture>img/men_shirt1</picture>
 				<brand>Armani</brand>
 				<detail>Armani Collezioni Long Sleeved Check Shirt In Navy, An overall woven gingham check design in navy and white on a textured seersucker fabric. A full front grey pearlescent Armani Collezioni logo embossed button opening with a standard shirt collar and adjustable button fastening cuffs on the long sleeves.</detail>
 				<material>100% Cotton</material>
@@ -71,7 +71,7 @@
 			<shirt>
 				<name>Versace Collezioni Long Sleeved Check Shirt Navy</name>
 				<price>200</price>
-				<picture></picture>
+				<picture>img/men_shirt2</picture>
 				<brand>Versace</brand>
 				<detail>Versace Collezioni Long Sleeved Check Shirt In Navy, An overall woven gingham check design in navy and white on a textured seersucker fabric. A full front grey pearlescent Versace Collezioni logo embossed button opening with a standard shirt collar and adjustable button fastening cuffs on the long sleeves.</detail>
 				<material>100% Cotton</material>
@@ -82,7 +82,7 @@
 			<shirt>
 				<name>Versace Jeans Long Sleeved Shirt Black</name>
 				<price>200</price>
-				<picture></picture>
+				<picture>img/men_shirt3</picture>
 				<brand>Versace</brand>
 				<detail>Versace Jeans Long Sleeved Shirt In Black, Slim Fit. A full front black Versace Jeans button fastening with a dark metal Versace Jeans Tiger logo top button. A standard shirt collar with button fastening cuffs on the long sleeves. The front of the shirt features an overall Versace Jeans Tiger logo design in white. </detail>
 				<material>96% Cotton And 4% Elastane.</material>
@@ -93,7 +93,7 @@
 			<pants>
 				<name>Jack Honey Newbill Comfort Fit Jeans Blue</name>
 				<price>170</price>
-				<picture></picture>
+				<picture>img/men_pants1</picture>
 				<brand>Jack Honey</brand>
 				<detail>Jack Honey Newbill Comfort Fit Forever Dark Jeans In An 11oz Dark Indigo Blue Stretch Denim, A full black and dark metal Jack Honey logo embossed button fly with six large belt loops on the waistband.</detail>
 				<material>100% Cotton</material>
@@ -104,7 +104,7 @@
 			<pants>
 				<name>Carlo Bruni Waitom Regular Slim Fit Jeans Blue</name>
 				<price>115</price>
-				<picture></picture>
+				<picture>img/men_pants2</picture>
 				<brand>Carlo Bruni</brand>
 				<detail>Carlo Bruni Waitom Regular Slim Fit Jeans In An 11.5oz Deep Blue Denim, Intentional fading to typical stress points with intentional crease effect to the thighs, waistband and reverse of the knees.</detail>
 				<material>100% Cotton</material>
@@ -115,7 +115,7 @@
 			<accessory>
 				<name>Armani Jeans Small Shoulder Bag Blue</name>
 				<price>125</price>
-				<picture></picture>
+				<picture>img/men_accessory1</picture>
 				<brand>Armani</brand>
 				<detail>Armani Jeans Small Shoulder Bag in Blue, Large adjustable shoulder strap in black with the body of the bag in a blue woven canvas fabric. </detail>
 				<material>100% Polyester</material>
@@ -126,7 +126,7 @@
 			<accessory>
 				<name>Armani Exchange Reversible Belt Black </name>
 				<price>100</price>
-				<picture></picture>
+				<picture>img/men_accessory2</picture>
 				<brand>Armani</brand>
 				<detail>Armani Exchange Reversible Leather Belt In Black And Phantom Grey, A genuine leather belt strap with one side in black and the alternative side in phantom dark grey. Five holes at the squared end and a dark metal AX logo buckle. </detail>
 				<material>100% Genuine Leather</material>
@@ -137,7 +137,7 @@
 			<accessory>
 				<name>Versace Jeans Reversible Leather Belt Black</name>
 				<price>70</price>
-				<picture></picture>
+				<picture>img/men_accessory3</picture>
 				<brand>Versace</brand>
 				<detail>Versace Jeans Reversible Leather Belt in Black And Blue, A square reversible silver coloured metal pin buckle featuring the signature Versace Jeans logo on the metal belt loop. The belt strap is in black saffiano leather on one side with the alternate side in a textured blue suede leather.</detail>
 				<material>100% leather</material>
@@ -152,7 +152,7 @@
 			<T-shirt>
 				<name>A|X WINGS LOGO TEE</name>
 				<price>50</price>
-				<picture></picture>
+				<picture>img/ladies_tshirt1</picture>
 				<brand>Armani</brand>
 				<detail>Delicate wings evoke A|X's classic eagle insignia in a new way.</detail>
 				<material>100% Cotton</material>
@@ -163,7 +163,7 @@
 			<T-shirt>
 				<name>SEQUIN LOGO CREWNECK TEE</name>
 				<price>50</price>
-				<picture></picture>
+				<picture>img/ladies_tshirt2</picture>
 				<brand>Armani</brand>
 				<detail>Our classic logo gets a glam update, studded in high-shine reflective sequins.</detail>
 				<material>100% Cotton</material>
@@ -174,7 +174,7 @@
 			<T-shirt>
 				<name>Versace Embroidered T-shirt</name>
 				<price>415</price>
-				<picture></picture>
+				<picture>img/ladies_tshirt3</picture>
 				<brand>Versace</brand>
 				<detail>Embroidered in neon green, the designer's name serves as a bold announcement of the iconic house. Wear the buttoned-neck look with your favourite bomber jacket for downtown cool.</detail>
 				<material>90% viscose, 10% elastane</material>
@@ -185,7 +185,7 @@
 			<T-shirt>
 				<name>Versace Logo contrast top</name>
 				<price>1200</price>
-				<picture></picture>
+				<picture>img/ladies_tshirt4</picture>
 				<brand>Versace</brand>
 				<detail>Make a vibrant statement with this top from Versace with its contrasting colour panels. The designer logo emblazoned on the front has a tactile feel that shows your love for Versace artfully.</detail>
 				<material>71% acetate, 29% viscose</material>
@@ -196,7 +196,7 @@
 			<shirt>
 				<name>Armani Blue stretch cotton plain shirt</name>
 				<price>115</price>
-				<picture></picture>
+				<picture>img/ladies_shirt1</picture>
 				<brand>Armani</brand>
 				<detail>Blue stretch cotton plain shirt from Armani Jeans. Crafted from a high quality fabric, this piece delivers a soft touch to the skin whilst keeping your basic ensembles stylish.</detail>
 				<material>100% Cotton</material>
@@ -207,7 +207,7 @@
 			<shirt>
 				<name>Armani Chambray Shirt</name>
 				<price>115</price>
-				<picture></picture>
+				<picture>img/ladies_shirt2</picture>
 				<brand>Armani</brand>
 				<detail>This Armani Jeans Chambray shirt is a luxurious alternative to a classic denim shirt. Crafted from a high quality fabric, this piece delivers a soft touch to the skin whilst keeping your basic ensembles stylish.</detail>
 				<material>100% lyocell</material>
@@ -218,7 +218,7 @@
 			<shirt>
 				<name>Versace Printed silk-twill shirt</name>
 				<price>1350</price>
-				<picture></picture>
+				<picture>img/ladies_shirt3</picture>
 				<brand>Versace</brand>
 				<detail>This silk-twill shirt is paneled with leopard spots through the front and zebra stripes at the back. It's finished with gold 'Medusa' buttons at the collar and cuffs and is intended for a slightly loose fit.</detail>
 				<material>100% silk</material>
@@ -229,7 +229,7 @@
 			<shirt>
 				<name>Versace Baroccoflage print shirt</name>
 				<price>1450</price>
-				<picture></picture>
+				<picture>img/ladies_shirt4</picture>
 				<brand>Versace</brand>
 				<detail>Cut in Italy from multicoloured silk, the vibrant piece boasts a classic collar, long sleeves with button cuffs, a concealed front button placket, a loose-fitting flowy silhouette.</detail>
 				<material>100% silk</material>
@@ -240,7 +240,7 @@
 			<shirt>
 				<name>Versace printed shirt</name>
 				<price>650</price>
-				<picture></picture>
+				<picture>img/ladies_shirt5</picture>
 				<brand>Versace</brand>
 				<detail>This multicoloured printed shirt is a prime example, fashioned in Italy from lustrous silk. It features a classic collared neckline, long sleeves with buttoned cuffs, a concealed front button fastening, a loose fit and a curved hemline.</detail>
 				<material>100% silk</material>
@@ -251,7 +251,7 @@
 			<pants>
 				<name>Carlo Bruni Cream High Waisted Wide Leg pants</name>
 				<price>65</price>
-				<picture></picture>
+				<picture>img/ladies_pants1</picture>
 				<brand>Carlo Bruni</brand>
 				<detail>With super flattering curve skimming fabric and tailoring detail. Wear with a crop top, shirt or bodysuit for a sophisticated feel. Length approx 115cm/45".</detail>
 				<material>100% Cotton</material>
@@ -262,7 +262,7 @@
 			<pants>
 				<name>Jack Honey loose fit cropped pants </name>
 				<price>115</price>
-				<picture></picture>
+				<picture>img/ladies_pants2</picture>
 				<brand>Jack Honey</brand>
 				<detail>Beige loose fit cropped trousers.</detail>
 				<material>100% Cotton</material>
@@ -273,7 +273,7 @@
 			<pants>
 				<name>Jack Honey striped flared trousers</name>
 				<price>515</price>
-				<picture></picture>
+				<picture>img/ladies_pants3</picture>
 				<brand>Jack Honey</brand>
 				<detail>Black and brown striped flared trousers from Jack Honey.</detail>
 				<material>100% Viscose</material>
@@ -284,7 +284,7 @@
 			<accessory>
 				<name>Versace Medusa belt</name>
 				<price>666</price>
-				<picture></picture>
+				<picture>img/ladies_accessory1</picture>
 				<brand>Versace</brand>
 				<detail>Black calf leather Medusa belt from Versace featuring gold-tone hardware and an adjustable fit.</detail>
 				<material>100% Calf Leather</material>
@@ -295,7 +295,7 @@
 			<accessory>
 				<name>Armani Borsa Bag</name>
 				<price>666</price>
-				<picture></picture>
+				<picture>img/ladies_accessory2</picture>
 				<brand>Armani</brand>
 				<detail>The Borsa Shopping Bag from Armani Jeans is sleek and simple with its luxe leather-look shell, silver-toned hardware and elegant red lining.</detail>
 				<material>100% Calf Leather</material>
@@ -306,15 +306,14 @@
 			<accessory>
 				<name>Carlo Bruni clutch </name>
 				<price>1666</price>
-				<picture></picture>
+				<picture>img/ladies_accessory3</picture>
 				<brand>Carlo Bruni</brand>
 				<detail>Black leather knuckle box clutch from Alexander McQueen featuring gold-tone hardware, an oblong body, crystal embellishments and a gold-tone stud detailing.</detail>
 				<material>50% Leather50% other fibres</material>
 				<care></care>
 				<size>H7cm x W22cm x D4.5cm</size>
 				<fit></fit>
-			</accessory>
-			
+			</accessory>			
 		</catalog>
 	</ladies>
 </products>
