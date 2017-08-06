@@ -36,7 +36,37 @@
 
     <link rel="shortcut icon" href="favicon.png">
 
+	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+	<style>
+		.product img{
+			height:321px;
+			width:321px; 
+		}
+	</style>
 
+	<script>
+		$(document).ready(function(){
+			xmlhttp=new XMLHttpRequest();
+			xmlhttp.onreadystatechange=function(){
+				 if ( xmlhttp.readyState == 4 && 
+			        	xmlhttp.status == 200 &&  xmlhttp.responseXML ){
+					 for(var i=13;i<19;i++){						 
+						document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html"><img src="' 
+								 										+ (xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i).childNodes[0].nodeValue + '_1.jpg')
+								 										+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html"><img src="'
+								 										+ (xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i).childNodes[0].nodeValue + '_2.jpg')
+								 										+ '" alt="" class="img-responsive"></a></div></div></div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-responsive"></a><div class="text"><h3><a href="detail.html">'
+								 										+ xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue
+								 										+ '</a></h3><p class="price">'
+								 										+ 'AU$' + xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue
+								 										+ '</p><p class="buttons"><a href="detail.html" class="btn btn-default">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p></div></div></div>');
+	 					 }
+					 }				 
+			}
+			xmlhttp.open("GET","products.xml",true);
+			xmlhttp.send();
+		});
+	</script>
 
 </head>
 
@@ -564,9 +594,9 @@
                         </div>
                     </div>
 
-                    <div class="row products">
+                    <div class="row products" id="products">
 
-                        <div class="col-md-4 col-sm-6">
+                       <!--  <div class="col-md-4 col-sm-6">
                             <div class="product">
                                 <div class="flip-container">
                                     <div class="flipper">
@@ -593,9 +623,9 @@
                                         <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </p>
                                 </div>
-                                <!-- /.text -->
+                                /.text
                             </div>
-                            <!-- /.product -->
+                            /.product
                         </div>
 
                         <div class="col-md-4 col-sm-6">
@@ -625,27 +655,27 @@
                                         <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </p>
                                 </div>
-                                <!-- /.text -->
+                                /.text
 
                                 <div class="ribbon sale">
                                     <div class="theribbon">SALE</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                                <!-- /.ribbon -->
+                                /.ribbon
 
                                 <div class="ribbon new">
                                     <div class="theribbon">NEW</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                                <!-- /.ribbon -->
+                                /.ribbon
 
                                 <div class="ribbon gift">
                                     <div class="theribbon">GIFT</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                                <!-- /.ribbon -->
+                                /.ribbon
                             </div>
-                            <!-- /.product -->
+                            /.product
                         </div>
 
                         <div class="col-md-4 col-sm-6">
@@ -676,9 +706,9 @@
                                     </p>
 
                                 </div>
-                                <!-- /.text -->
+                                /.text
                             </div>
-                            <!-- /.product -->
+                            /.product
                         </div>
 
                         <div class="col-md-4 col-sm-6">
@@ -709,9 +739,9 @@
                                     </p>
 
                                 </div>
-                                <!-- /.text -->
+                                /.text
                             </div>
-                            <!-- /.product -->
+                            /.product
                         </div>
 
                         <div class="col-md-4 col-sm-6">
@@ -742,15 +772,15 @@
                                     </p>
 
                                 </div>
-                                <!-- /.text -->
+                                /.text
 
                                 <div class="ribbon new">
                                     <div class="theribbon">NEW</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                                <!-- /.ribbon -->
+                                /.ribbon
                             </div>
-                            <!-- /.product -->
+                            /.product
                         </div>
 
                         <div class="col-md-4 col-sm-6">
@@ -781,19 +811,19 @@
                                     </p>
 
                                 </div>
-                                <!-- /.text -->
+                                /.text
 
                                 <div class="ribbon gift">
                                     <div class="theribbon">GIFT</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                                <!-- /.ribbon -->
+                                /.ribbon
 
                             </div>
-                            <!-- /.product -->
+                            /.product
                         </div>
-                        <!-- /.col-md-4 -->
-                    </div>
+                        /.col-md-4
+                    </div> -->
                     <!-- /.products -->
 
                     <div class="pages">
