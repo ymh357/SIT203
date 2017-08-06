@@ -45,53 +45,59 @@
 	</style>
 
 	<script>
+	function findNums(category){
+		var start=0;
+		var times=6;
+		switch(category){
+		case "menTShirt":
+			start=0;
+			times=5;
+			break;
+		case "menShirt":
+			start=5;
+			times=3;
+			break;
+		case "menPants":
+			start=8;
+			times=2;
+			break;
+		case "menAccessory":
+			start=10;
+			times=3;
+			break;
+		case "ladyTShirt":
+			start=13;
+			times=4;
+			break;
+		case "ladyShirt":
+			start=17;
+			times=5;
+			break;
+		case "ladyPants":
+			start=22;
+			times=3;
+			break;
+		case "ladyAccessory":
+			start=25;
+			times=3;
+			break;
+		case "men":
+			start=0;
+			times=6;
+			break;
+		case "lady":
+			start=13;
+			times=6;
+			break;
+		}
+			var nums=new Array(start,times);
+			return nums;
+	}
+		
 		function showProducts(category){
-			var start=0;
-			var times=6;
-			switch(category){
-			case "menTShirt":
-				start=0;
-				times=5;
-				break;
-			case "menShirt":
-				start=5;
-				times=3;
-				break;
-			case "menPants":
-				start=8;
-				times=2;
-				break;
-			case "menAccessory":
-				start=10;
-				times=3;
-				break;
-			case "ladyTShirt":
-				start=13;
-				times=4;
-				break;
-			case "ladyShirt":
-				start=17;
-				times=5;
-				break;
-			case "ladyPants":
-				start=22;
-				times=3;
-				break;
-			case "ladyAccessory":
-				start=25;
-				times=3;
-				break;
-			case "men":
-				start=0;
-				times=6;
-				break;
-			case "lady":
-				start=13;
-				times=6;
-				break;
-			}
 			document.getElementById("products").innerHTML = "";
-			for(var i=start;times-->0;i++){						 
+			var nums=findNums(category);
+			for(var i=nums[0];nums[1]-->0;i++){						 
 					document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html"><img src="' 
 							 										+ (xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i).childNodes[0].nodeValue + '_1.jpg')
 							 										+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html"><img src="'
@@ -102,21 +108,86 @@
 							 										+ 'AU$' + xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue
 							 										+ '</p><p class="buttons"><a href="detail.html" class="btn btn-default">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p></div></div></div>');
 				}  	
+			document.getElementById("belongto").innerHTML = '<li><a href="index.html">Home</a></li>';
+			if(nums[0]<13){
+				document.getElementById("belongto").innerHTML += '<li>men</li>';
+			}else{
+				document.getElementById("belongto").innerHTML += '<li>ladies</li>';
+			}
 			$("#"+category).addClass("btn default");
 		}
-		
+			
+		function quickSort(products,seq) {
+			if (products.length <= 1){
+				return products; 
+			}
+			var pivotIndex = Math.floor(products.length / 2);
+			var pivot = products.splice(pivotIndex, 1)[0];
+			var left = new Array();
+			var right = new Array();
+			if(seq=="low-high"){				
+				for (var i = 0; i < products.length; i++){
+					if(products[i].price - pivot.price < 0){
+						left.push(products[i]);
+					}else{
+						right.push(products[i]);
+					}
+				}
+				return quickSort(left,seq).concat([pivot], quickSort(right,seq));
+			}else if(seq=="high-low"){
+				for (var i = 0; i < products.length; i++){
+					if(products[i].price - pivot.price > 0){
+						left.push(products[i]);
+					}else{
+						right.push(products[i]);
+					}
+				}
+				return quickSort(left,seq).concat([pivot], quickSort(right,seq));
+			}
+		}
+
+		function sort(seq){
+			document.getElementById("products").innerHTML = "";
+			var nums=findNums(category);
+			function Product(picture,price,brand,name)
+			{
+				this.picture=picture;
+				this.price=price;
+				this.brand=brand;
+				this.name=name;
+			}
+			var products=new Array();
+			for(var i=nums[0],count=0;nums[1]-->0;i++,count++){	
+				var product=new Product(xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i).childNodes[0].nodeValue,
+						xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue,
+						xmlhttp.responseXML.documentElement.getElementsByTagName("brand").item(i).childNodes[0].nodeValue,
+						xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue);
+				products[count]=product;
+			}
+			var sortedProducts=quickSort(products,seq);
+			for(var i=0;i<sortedProducts.length;i++){
+				document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html"><img src="' 
+							+ (sortedProducts[i].picture + '_1.jpg')
+							+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html"><img src="'
+							+ (sortedProducts[i].picture + '_2.jpg')
+							+ '" alt="" class="img-responsive"></a></div></div></div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-responsive"></a><div class="text"><h3><a href="detail.html">'
+							+ sortedProducts[i].name
+							+ '</a></h3><p class="price">'
+							+ 'AU$' + sortedProducts[i].price
+							+ '</p><p class="buttons"><a href="detail.html" class="btn btn-default">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p></div></div></div>');
+			}		
+		}
 	
 		$(document).ready(function(){
 			xmlhttp=new XMLHttpRequest();
 			xmlhttp.onreadystatechange=function(){
 				 if ( xmlhttp.readyState == 4 && 
 			        	xmlhttp.status == 200 &&  xmlhttp.responseXML ){
-					 var category=document.location.hash.split("#")[1];
-					 if(!!category){
-						 showProducts(category);
-					 }else{
-						 showProducts("lady");	
+					 category=document.location.hash.split("#")[1];
+					 if(!category){
+						 category="men";
 					 }
+					 showProducts(category);
 				 }
 			}
 			xmlhttp.open("GET","products.xml",true);
@@ -136,6 +207,10 @@
 			});
 			$("#ladyAccessory").click(function(){
 				document.location.reload();
+			});
+			$("#sort-by").change(function(){
+				var seq=$("#sort-by").val();
+				sort(seq);
 			});
 		});
 	</script>
@@ -653,9 +728,10 @@
                                         <div class="col-md-6 col-sm-6">
                                             <div class="products-sort-by">
                                                 <strong>Sort by</strong>
-                                                <select name="sort-by" class="form-control">
-                                                    <option>Price: low-high</option>
-													<option>Price: high-low</option>
+                                                <select name="sort-by" id="sort-by" class="form-control">
+                                                    <option value="" selected="selected" disabled="disabled">Please choose the sequence</option>
+                                                    <option value="low-high">Price: low-high</option>
+													<option value="high-low">Price: high-low</option>
                                                     <!--<option>Sales first</option>-->
                                                 </select>
                                             </div>
