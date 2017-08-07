@@ -263,10 +263,21 @@
 			$("#menAccessory").click(function(){
 				document.location.reload();
 			});
+			$("#topMenShirt").click(function(){
+				document.location.reload();
+			});
+			$("#topMenTShirt").click(function(){
+				document.location.reload();
+			});
+			$("#topMenPants").click(function(){
+				document.location.reload();
+			});
+			
 			$("#sort-by").change(function(){
 				var seq=$("#sort-by").val();
 				sort(seq);
 			}); 
+			
 		});
 	</script>
 
@@ -370,11 +381,11 @@
                                         <div class="col-sm-6"> <!-- col-sm-3 is changed to col-sm-6 by Shang-->
                                             <h5>Clothing</h5>
                                             <ul>
-                                                <li><a href="category-man.html">T-shirts</a>
+                                                <li><a href="category-man.html#menTShirt" id="topMenTShirt">T-shirts</a>
                                                 </li>
-                                                <li><a href="category-man.html">Shirts</a>
+                                                <li><a href="category-man.html#menShirt" id="topMenShirt">Shirts</a>
                                                 </li>												
-                                                <li><a href="category-man.html">Pants</a>
+                                                <li><a href="category-man.html#menPants" id="topMenPants">Pants</a>
                                                 </li>												
                                                 <!--
 												<li><a href="category-man.html">Accessories</a>
@@ -450,12 +461,12 @@
                                         <div class="col-sm-6"> <!-- col-sm-3 is changed to col-sm-6 by Shang-->
                                             <h5>Clothing</h5>
                                             <ul>
-                                                <li><a href="category-lady.html">T-shirts</a>
+                                                <li><a href="category-lady.html#ladyTShirt">T-shirts</a>
                                                 </li>
-                                                <li><a href="category-lady.html">Shirts</a>
-                                                </li>
-                                                <li><a href="category-lady.html">Pants</a>
-                                                </li>
+                                                <li><a href="category-lady.html#ladyShirt">Shirts</a>
+                                                </li>												
+                                                <li><a href="category-lady.html#ladyPants">Pants</a>
+                                                </li>		
 												<!--
                                                 <li><a href="category-lady.html">Accessories</a>
                                                 </li>

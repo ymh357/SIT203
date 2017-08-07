@@ -185,7 +185,7 @@
 				}
 			}
 			return false;
-		}		
+		}
 		
 		$(document).ready(function(){
 			xmlhttp=new XMLHttpRequest();
@@ -260,6 +260,15 @@
 				document.location.reload();
 			});
 			$("#ladyAccessory").click(function(){
+				document.location.reload();
+			});
+			$("#topLadyTShirt").click(function(){
+				document.location.reload();
+			});
+			$("#topLadyShirt").click(function(){
+				document.location.reload();
+			});
+			$("#topLadyPants").click(function(){
 				document.location.reload();
 			});
 			$("#sort-by").change(function(){
@@ -368,12 +377,12 @@
                                         <div class="col-sm-6"> <!-- col-sm-3 is changed to col-sm-6 by Shang-->
                                             <h5>Clothing</h5>
                                             <ul>
-                                                <li><a href="category-man.html">T-shirts</a>
+                                                <li><a href="category-man.html#menTShirt">T-shirts</a>
                                                 </li>
-                                                <li><a href="category-man.html">Shirts</a>
+                                                <li><a href="category-man.html#menShirt">Shirts</a>
                                                 </li>												
-                                                <li><a href="category-man.html">Pants</a>
-                                                </li>												
+                                                <li><a href="category-man.html#menPants">Pants</a>
+                                                </li>			
                                                 <!--
 												<li><a href="category-man.html">Accessories</a>
                                                 </li>
@@ -448,11 +457,11 @@
                                         <div class="col-sm-6"> <!-- col-sm-3 is changed to col-sm-6 by Shang-->
                                             <h5>Clothing</h5>
                                             <ul>
-                                                <li><a href="category-lady.html">T-shirts</a>
+                                                <li><a href="category-lady.html#ladyTShirt" id="topLadyTShirt">T-shirts</a>
                                                 </li>
-                                                <li><a href="category-lady.html">Shirts</a>
-                                                </li>
-                                                <li><a href="category-lady.html">Pants</a>
+                                                <li><a href="category-lady.html#ladyShirt" id="topLadyShirt">Shirts</a>
+                                                </li>												
+                                                <li><a href="category-lady.html#ladyPants" id="topLadyPants">Pants</a>
                                                 </li>
 												<!--
                                                 <li><a href="category-lady.html">Accessories</a>
