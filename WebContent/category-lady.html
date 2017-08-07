@@ -178,12 +178,21 @@
 			}		
 		}
 	
+		function isInArray(a,arr){
+			for(e in arr){
+				if(a==arr[e]){
+					return true;
+				}
+			}
+			return false;
+		}		
+		
 		$(document).ready(function(){
 			xmlhttp=new XMLHttpRequest();
+			category=document.location.hash.split("#")[1];
 			xmlhttp.onreadystatechange=function(){
 				 if ( xmlhttp.readyState == 4 && 
 			        	xmlhttp.status == 200 &&  xmlhttp.responseXML ){
-					 category=document.location.hash.split("#")[1];
 					 if(!category){
 						 category="men";
 					 }
@@ -193,9 +202,54 @@
 			xmlhttp.open("GET","products.xml",true);
 			xmlhttp.send();
 			
-			/* $("#applyBtn").click(function(){
-				document.location.reload();
-			}); */
+			$("#applyBtn").click(function(){
+				var brands=new Array();
+				if($("#Armani").prop("checked")){
+					brands.push("Armani");
+				}
+				if($("#Versace").prop("checked")){
+					brands.push("Versace");
+				}
+				if($("#CarloBruni").prop("checked")){
+					brands.push("Carlo Bruni");
+				}
+				if($("#JackHoney").prop("checked")){
+					brands.push("Jack Honey");
+				}
+				document.getElementById("products").innerHTML = "";
+				//alert(category);
+				var nums=findNums(category);
+				function Product(picture,price,brand,name)
+				{
+					this.picture=picture;
+					this.price=price;
+					this.brand=brand;
+					this.name=name;
+				}
+				var products=new Array();
+				for(var i=nums[0],count=0;nums[1]-->0;i++,count++){	
+					if(isInArray(xmlhttp.responseXML.documentElement.getElementsByTagName("brand").item(i).childNodes[0].nodeValue,brands)){					
+						var product=new Product(xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i).childNodes[0].nodeValue,
+								xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue,
+								xmlhttp.responseXML.documentElement.getElementsByTagName("brand").item(i).childNodes[0].nodeValue,
+								xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue);
+						products[count]=product;
+					}else{
+						count--;
+					}
+				}
+				for(var i=0;i<products.length;i++){
+					document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html"><img src="' 
+								+ (products[i].picture + '_1.jpg')
+								+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html"><img src="'
+								+ (products[i].picture + '_2.jpg')
+								+ '" alt="" class="img-responsive"></a></div></div></div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-responsive"></a><div class="text"><h3><a href="detail.html">'
+								+ products[i].name
+								+ '</a></h3><p class="price">'
+								+ 'AU$' + products[i].price
+								+ '</p><p class="buttons"><a href="detail.html" class="btn btn-default">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p></div></div></div>');
+				}	
+			}); 
 			$("#ladyTShirt").click(function(){
 				document.location.reload();
 			});
@@ -667,30 +721,28 @@
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox">Armani (10)
+                                            <input type="checkbox" id="Armani">Armani (10)
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox">Versace (10)
+                                            <input type="checkbox" id="Versace">Versace (10)
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox">Carlo Bruni (2)
+                                            <input type="checkbox" id="CarloBruni">Carlo Bruni (2)
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox">Jack Honey (2)
+                                            <input type="checkbox" id="JackHoney">Jack Honey (2)
                                         </label>
                                     </div>
                                 </div>
-
-                                <button class="btn btn-default btn-sm btn-primary" id="applyBtn"><i class="fa fa-pencil"></i> Apply</button>
-
                             </form>
-
+                            
+                                <button class="btn btn-default btn-sm btn-primary" id="applyBtn"><i class="fa fa-pencil"></i> Apply</button>
                         </div>
                     </div>
 
