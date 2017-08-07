@@ -44,9 +44,19 @@
 	</style>
 
 	<script>
+	
 	function findNums(category){
+		
+		/*
+			This function is to find the index of products of the specific category in xml.
+		*/
+		
 		var start=0;
 		var times=6;
+		// If category is unpredictly to be other String, show as "men".
+		
+		
+		// As the sequence of what they are in xml.
 		switch(category){
 		case "menTShirt":
 			start=0;
@@ -95,6 +105,10 @@
 	}
 		
 		function showProducts(category){
+			/*
+				To display Products information in <div id="products"></div>
+			*/
+			
 			document.getElementById("products").innerHTML = "";
 			var nums=findNums(category);
 			for(var i=nums[0];nums[1]-->0;i++){							 
@@ -111,19 +125,30 @@
 			
 			document.getElementById("belongto").innerHTML = '<li><a href="index.html">Home</a></li>';
 			if(nums[0]<13){
+				// Men.
+				
 				document.getElementById("belongto").innerHTML += '<li>men</li>';
 			}else{
+				// Ladies.
+				
 				document.getElementById("belongto").innerHTML += '<li>ladies</li>';
 			}
 			
-			$("#"+category).addClass("btn default");  												
+			$("#"+category).addClass("btn default");  		
+			// Make the category in left to be shown as currently chosen.  
 		}
 		function quickSort(products,seq) {
+			/*
+				Copyright Declare:
+					Reference http://www.jianshu.com/p/e0597e82a2e0,
+					Maing some modifications based on that link.
+			*/
+			
 			if (products.length <= 1){
 				return products; 
 			}
 			var pivotIndex = Math.floor(products.length / 2);
-			var pivot = products.splice(pivotIndex, 1)[0];
+			var pivot = products.splice(pivotIndex, 1)[0];		// Choose the middle one as pivot.
 			var left = new Array();
 			var right = new Array();
 			if(seq=="low-high"){				
@@ -148,6 +173,10 @@
 		}
 
 		function sort(seq){
+			/*
+				Sort products by price sequence.
+			*/
+			
 			document.getElementById("products").innerHTML = "";
 			var nums=findNums(category);
 			function Product(picture,price,brand,name)
@@ -165,7 +194,11 @@
 						xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue);
 				products[count]=product;
 			}
+			// Add currently shown products to Array products.
+			
 			var sortedProducts=quickSort(products,seq);
+			// In sortedProducts, elements are sorted by price.
+			
 			for(var i=0;i<sortedProducts.length;i++){
 				document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html"><img src="' 
 							+ (sortedProducts[i].picture + '_1.jpg')
@@ -180,6 +213,10 @@
 		}
 		
 		function isInArray(a,arr){
+			/*
+				To see if a is in Array arr.
+			*/
+			
 			for(e in arr){
 				if(a==arr[e]){
 					return true;
@@ -189,11 +226,16 @@
 		}		
 	
 		$(document).ready(function(){
-			xmlhttp=new XMLHttpRequest();
+			
 			category=document.location.hash.split("#")[1];
+			// Category is string after "#" in current url; using it to decide what category of products to display.
+			
+			xmlhttp=new XMLHttpRequest();
 			xmlhttp.onreadystatechange=function(){
 				 if ( xmlhttp.readyState == 4 && 
 			        	xmlhttp.status == 200 &&  xmlhttp.responseXML ){
+					 
+					 // When open category-man.html.
 					 if(!category){
 						 category="men";
 					 }
@@ -217,6 +259,8 @@
 				if($("#JackHoney").prop("checked")){
 					brands.push("Jack Honey");
 				}
+				// To see if there is any checkbox chosen, and put the brand into Array brands.
+				
 				document.getElementById("products").innerHTML = "";
 				var nums=findNums(category);
 				function Product(picture,price,brand,name)
@@ -228,6 +272,8 @@
 				}
 				var products=new Array();
 				for(var i=nums[0],count=0;nums[1]-->0;i++,count++){	
+						
+						// To see if the brand of current product in xml is in Array brands. 
 						if(isInArray(xmlhttp.responseXML.documentElement.getElementsByTagName("brand").item(i).childNodes[0].nodeValue,brands)){					
 						var product=new Product(xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i).childNodes[0].nodeValue,
 								xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue,
@@ -238,6 +284,8 @@
 						count--;
 					}
 				}
+				// Now all products meet the brand demands are in Array products.
+				
 				for(var i=0;i<products.length;i++){
 					document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html"><img src="' 
 								+ (products[i].picture + '_1.jpg')
@@ -252,6 +300,8 @@
 			}); 
 			
  			$("#menShirt").click(function(){
+ 				
+ 				// Anchor towards content inside current page will not reload the page; So reload the page manually.  
 				document.location.reload();
 			});
 			$("#menTShirt").click(function(){
