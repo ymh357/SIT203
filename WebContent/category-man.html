@@ -168,7 +168,7 @@
 					var name=xmlhttp.responseXML.documentElement.getElementsByTagName("name")
 								.item(i).childNodes[0].nodeValue;
 					if(((!!name.match("Bag"))&&(!!category.match("Bag"))) ||
-						((!!name.match("Belt"))&&(!!category.match("Belt")))	){
+						((!!name.match("[Bb]elt"))&&(!!category.match("Belt")))	){
 						var item=new Product(xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2).childNodes[0].nodeValue,
 												xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2+1).childNodes[0].nodeValue,
 												xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue,
@@ -397,6 +397,250 @@
 				$("#CarloBruni").prop("checked",false);
 				$("#JackHoney").prop("checked",false);
 			})
+			
+			$("#6Products").click(function(){
+				$("#6Products").addClass("btn-primary");
+				$("#12Products").removeClass("btn-primary");
+				$("#allProducts").removeClass("btn-primary");
+				if(currentItems.length>6){
+					var sixItems=new Array();
+					for(var i=0;i<6;i++){
+						sixItems[i]=currentItems[i];
+					}
+					showItems(sixItems);
+				}
+			});
+			$("#12Products").click(function(){
+				$("#12Products").addClass("btn-primary");
+				$("#6Products").removeClass("btn-primary");
+				$("#allProducts").removeClass("btn-primary");
+				if(currentItems.length>12){
+					var tlvItems=new Array();
+					for(var i=0;i<12;i++){
+						tlvItems[i]=currentItems[i];
+					}
+					showItems(tlvItems);
+				}
+			});
+			$("#allProducts").click(function(){	
+				$("#allProducts").addClass("btn-primary");
+				$("#6Products").removeClass("btn-primary");
+				$("#12Products").removeClass("btn-primary");
+				showItems(currentItems);
+			});
+			
+			$("#page1").click(function(){
+				$("#page1").addClass("active");
+				$("#page2").removeClass("active");
+				$("#page3").removeClass("active");
+				$("#page4").removeClass("active");
+				$("#page5").removeClass("active");
+				if(!!$("#6Products").attr("class").match("btn-primary")){
+					if(currentItems.length>6){
+						var sixItems=new Array();
+						for(var i=0;i<6;i++){
+							sixItems[i]=currentItems[i];
+						}
+						showItems(sixItems);
+					}
+				}else if(!!$("#12Products").attr("class").match("btn-primary")){
+					if(currentItems.length>12){
+						var tlvItems=new Array();
+						for(var i=0;i<12;i++){
+							tlvItems[i]=currentItems[i];
+						}
+						showItems(tlvItems);
+					}else{
+						showItems(null);
+					}
+				}else if(!!$("#allProducts").attr("class").match("btn-primary")){
+					showItems(currentItems);
+				}else{
+					// If all 3 is not selected.
+					// Impossible.
+				}
+				
+			});
+			$("#page2").click(function(){
+				$("#page2").addClass("active");
+				$("#page3").removeClass("active");
+				$("#page4").removeClass("active");
+				$("#page5").removeClass("active");
+				$("#page1").removeClass("active");
+				if(!!$("#6Products").attr("class").match("btn-primary")){
+					if(currentItems.length>12){
+						var sixItems=new Array();
+						for(var i=6;i<12;i++){
+							sixItems[i]=currentItems[i];
+						}
+						showItems(sixItems);
+					}else if(6<currentItems.length && currentItems.length<=12){
+						var sixItems=new Array();
+						for(var i=6;i<currentItems.length;i++){
+							sixItems[i]=currentItems[i];
+						}
+						showItems(sixItems);
+					}else{
+						showItems(null);
+					}
+				}else if(!!$("#12Products").attr("class").match("btn-primary")){
+					if(currentItems.length>24){
+						var tlvItems=new Array();
+						for(var i=12;i<24;i++){
+							tlvItems[i]=currentItems[i];
+						}
+						showItems(tlvItems);
+					}else if(12<currentItems.length&&currentItems.length<=24){
+						var tlvItems=new Array();
+						for(var i=12;i<currentItems.length;i++){
+							tlvItems[i]=currentItems[i];
+						}
+						showItems(tlvItems);
+					}else{
+						showItems(null);
+					}
+				}else if(!!$("#allProducts").attr("class").match("btn-primary")){
+					showItems(null);
+				}else{
+					// If all 3 is not selected.
+					// Impossible.
+				}
+			});
+			$("#page3").click(function(){
+				$("#page3").addClass("active");
+				$("#page1").removeClass("active");
+				$("#page2").removeClass("active");
+				$("#page3").removeClass("active");
+				$("#page4").removeClass("active");
+				if(!!$("#6Products").attr("class").match("btn-primary")){
+					if(currentItems.length>18){
+						var sixItems=new Array();
+						for(var i=12;i<18;i++){
+							sixItems[i]=currentItems[i];
+						}
+						showItems(sixItems);
+					}else if(12<currentItems.length && currentItems.length<=18){
+						var sixItems=new Array();
+						for(var i=12;i<currentItems.length;i++){
+							sixItems[i]=currentItems[i];
+						}
+						showItems(sixItems);
+					}else{
+						showItems(null);
+					}
+				}else if(!!$("#12Products").attr("class").match("btn-primary")){
+					if(currentItems.length>36){
+						var tlvItems=new Array();
+						for(var i=24;i<36;i++){
+							tlvItems[i]=currentItems[i];
+						}
+						showItems(tlvItems);
+					}else if(24<currentItems.length&&currentItems.length<=36){
+						var tlvItems=new Array();
+						for(var i=24;i<currentItems.length;i++){
+							tlvItems[i]=currentItems[i];
+						}
+						showItems(tlvItems);
+					}else{
+						showItems(null);
+					}
+				}else if(!!$("#allProducts").attr("class").match("btn-primary")){
+					showItems(null);
+				}else{
+					// If all 3 is not selected.
+					// Impossible.
+				}
+			});
+			$("#page4").click(function(){
+				$("#page4").addClass("active");
+				$("#page1").removeClass("active");
+				$("#page2").removeClass("active");
+				$("#page3").removeClass("active");
+				$("#page5").removeClass("active");
+				if(!!$("#6Products").attr("class").match("btn-primary")){
+					if(currentItems.length>24){
+						var sixItems=new Array();
+						for(var i=18;i<24;i++){
+							sixItems[i]=currentItems[i];
+						}
+						showItems(sixItems);
+					}else if(18<currentItems.length && currentItems.length<=24){
+						var sixItems=new Array();
+						for(var i=18;i<currentItems.length;i++){
+							sixItems[i]=currentItems[i];
+						}
+						showItems(sixItems);
+					}else{
+						showItems(null);
+					}
+				}else if(!!$("#12Products").attr("class").match("btn-primary")){
+					if(currentItems.length>48){
+						var tlvItems=new Array();
+						for(var i=36;i<48;i++){
+							tlvItems[i]=currentItems[i];
+						}
+						showItems(tlvItems);
+					}else if(36<currentItems.length&&currentItems.length<=48){
+						var tlvItems=new Array();
+						for(var i=36;i<currentItems.length;i++){
+							tlvItems[i]=currentItems[i];
+						}
+						showItems(tlvItems);
+					}else{
+						showItems(null);
+					}
+				}else if(!!$("#allProducts").attr("class").match("btn-primary")){
+					showItems(null);
+				}else{
+					// If all 3 is not selected.
+					// Impossible.
+				}
+			});
+			$("#page5").click(function(){
+				$("#page5").addClass("active");
+				$("#page1").removeClass("active");
+				$("#page2").removeClass("active");
+				$("#page3").removeClass("active");
+				$("#page4").removeClass("active");
+				if(!!$("#6Products").attr("class").match("btn-primary")){
+					if(currentItems.length>6){
+						var sixItems=new Array();
+						for(var i=24;i<30;i++){
+							sixItems[i]=currentItems[i];
+						}
+						showItems(sixItems);
+					}else if(24<currentItems.length && currentItems.length<=30){
+						var sixItems=new Array();
+						for(var i=24;i<currentItems.length;i++){
+							sixItems[i]=currentItems[i];
+						}
+						showItems(sixItems);
+					}else{
+						showItems(null);
+					}
+				}else if(!!$("#12Products").attr("class").match("btn-primary")){
+					if(currentItems.length>60){
+						var tlvItems=new Array();
+						for(var i=48;i<60;i++){
+							tlvItems[i]=currentItems[i];
+						}
+						showItems(tlvItems);
+					}else if(48<currentItems.length&&currentItems.length<=60){
+						var tlvItems=new Array();
+						for(var i=48;i<currentItems.length;i++){
+							tlvItems[i]=currentItems[i];
+						}
+						showItems(tlvItems);
+					}else{
+						showItems(null);
+					}
+				}else if(!!$("#allProducts").attr("class").match("btn-primary")){
+					showItems(null);
+				}else{
+					// If all 3 is not selected.
+					// Impossible.
+				}
+			});
 		});
 	</script>
 
@@ -907,7 +1151,7 @@
                                     <form class="form-inline">
                                         <div class="col-md-6 col-sm-6">
                                             <div class="products-number">
-                                                <strong>Show</strong>  <a href="#" class="btn btn-default btn-sm btn-primary" id="6Products">6</a>  <a href="#" class="btn btn-default btn-sm" id="12Products">12</a>  <a href="#" class="btn btn-default btn-sm" id="allProducts">All</a> products
+                                                <strong>Show</strong>  <a href="#" class="btn btn-default btn-sm" id="6Products">6</a>  <a href="#" class="btn btn-default btn-sm" id="12Products">12</a>  <a href="#" class="btn btn-default btn-sm btn-primary" id="allProducts">All</a> products
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
@@ -1170,15 +1414,15 @@
                         <ul class="pagination">
                             <li><a href="#">&laquo;</a>
                             </li>
-                            <li class="active"><a href="#">1</a>
+                            <li class="active" id="page1"><a href="#">1</a>
                             </li>
-                            <li><a href="#">2</a>
+                            <li id="page2"><a href="#">2</a>
                             </li>
-                            <li><a href="#">3</a>
+                            <li id="page3"><a href="#">3</a>
                             </li>
-                            <li><a href="#">4</a>
+                            <li id="page4"><a href="#">4</a>
                             </li>
-                            <li><a href="#">5</a>
+                            <li id="page5"><a href="#" >5</a>
                             </li>
                             <li><a href="#">&raquo;</a>
                             </li>
