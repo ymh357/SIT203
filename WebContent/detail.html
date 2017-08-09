@@ -33,10 +33,17 @@
     <link href="css/custom.css" rel="stylesheet">
 
     <script src="js/respond.min.js"></script>
+   	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
 
     <link rel="shortcut icon" href="favicon.png">
 
-
+	<script>
+		$(document).ready(function(){
+			product=document.location.hash.split("#")[1];
+			
+			document.getElementById("mainImage").innerHTML='<img src="img/detailbig1.jpg" alt="" class="img-responsive">';
+		})
+	</script>
 
 </head>
 
@@ -584,24 +591,24 @@
                     <div class="row" id="productMain">
                         <div class="col-sm-6">
                             <div id="mainImage">
-                                <img src="img/detailbig1.jpg" alt="" class="img-responsive">
+                                <!-- <img src="img/detailbig1.jpg" alt="" class="img-responsive"> -->
                             </div>
 
-                            <div class="ribbon sale">
+                           <!--  <div class="ribbon sale">
                                 <div class="theribbon">SALE</div>
                                 <div class="ribbon-background"></div>
                             </div>
-                            <!-- /.ribbon -->
+                            /.ribbon
 
                             <div class="ribbon new">
                                 <div class="theribbon">NEW</div>
                                 <div class="ribbon-background"></div>
                             </div>
-                            <!-- /.ribbon -->
+                            /.ribbon -->
 
                         </div>
-                        <div class="col-sm-6">
-                            <div class="box">
+                        <div class="col-sm-6" id="briefBox">
+                           <!--  <div class="box">
                                 <h1 class="text-center">White Blouse Armani</h1>
                                 <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material & care and sizing</a>
                                 </p>
@@ -609,10 +616,10 @@
 
                                 <p class="text-center buttons">
                                     <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> 
-									<!--
+									
                                     <a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
-									-->
-                                </p>
+									
+                                </p> -->
 
 
                             </div>
@@ -642,7 +649,7 @@
 
 
                     <div class="box" id="details">
-                        <p>
+                        <!-- <p>
                             <h4>Product details</h4>
                             <p>White lace top, woven, has a round neck, short sleeves, has knitted lining attached</p>
                             <h4>Material & care</h4>
@@ -661,17 +668,19 @@
                                 </p>
                             </blockquote>
 
-                            <hr>
-                            <div class="social">
-                                <h4>Show it to your friends</h4>
-                                <p>
-                                    <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
-                                    <a href="#" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
-                                    <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
-                                    <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
-                                </p>
-                            </div>
+                            <hr> -->
                     </div>
+                    
+                    <!-- I made it outside. -->
+                    <div class="social">
+                        <h4>Show it to your friends</h4>
+                        <p>
+                            <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
+                            <a href="#" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
+                            <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
+                            <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                        </p>
+                    </div> 
 
 					<!-- commented by Shang 04/07/2017
                     <div class="row same-height-row">

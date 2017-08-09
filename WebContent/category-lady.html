@@ -111,9 +111,9 @@
 			var nums=findNums(category);
 			for(var i=nums[0];nums[1]-->0;i++){						 
 					document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html"><img src="' 
-							 										+ (xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i).childNodes[0].nodeValue + '_1.jpg')
+							 										+ (xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2).childNodes[0].nodeValue)
 							 										+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html"><img src="'
-							 										+ (xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i).childNodes[0].nodeValue + '_2.jpg')
+							 										+ (xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2+1).childNodes[0].nodeValue)
 							 										+ '" alt="" class="img-responsive"></a></div></div></div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-responsive"></a><div class="text"><h3><a href="detail.html">'
 							 										+ xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue
 							 										+ '</a></h3><p class="price">'
@@ -176,16 +176,18 @@
 			
 			document.getElementById("products").innerHTML = "";
 			var nums=findNums(category);
-			function Product(picture,price,brand,name)
+			function Product(FPicture,BPicture,price,brand,name)
 			{
-				this.picture=picture;
+				this.FPicture=FPicture;
+				this.BPicture=BPicture;
 				this.price=price;
 				this.brand=brand;
 				this.name=name;
 			}
 			var products=new Array();
 			for(var i=nums[0],count=0;nums[1]-->0;i++,count++){	
-				var product=new Product(xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i).childNodes[0].nodeValue,
+				var product=new Product(xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(2*i).childNodes[0].nodeValue,
+						xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(2*i+1).childNodes[0].nodeValue,
 						xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue,
 						xmlhttp.responseXML.documentElement.getElementsByTagName("brand").item(i).childNodes[0].nodeValue,
 						xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue);
@@ -198,9 +200,9 @@
 			
 			for(var i=0;i<sortedProducts.length;i++){
 				document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html"><img src="' 
-							+ (sortedProducts[i].picture + '_1.jpg')
+							+ (sortedProducts[i].FPicture)
 							+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html"><img src="'
-							+ (sortedProducts[i].picture + '_2.jpg')
+							+ (sortedProducts[i].BPicture)
 							+ '" alt="" class="img-responsive"></a></div></div></div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-responsive"></a><div class="text"><h3><a href="detail.html">'
 							+ sortedProducts[i].name
 							+ '</a></h3><p class="price">'
@@ -260,9 +262,10 @@
 				document.getElementById("products").innerHTML = "";
 				//alert(category);
 				var nums=findNums(category);
-				function Product(picture,price,brand,name)
+				function Product(FPicture,BPicture,price,brand,name)
 				{
-					this.picture=picture;
+					this.FPicture=FPicture;
+					this.BPicture=BPicture;
 					this.price=price;
 					this.brand=brand;
 					this.name=name;
@@ -272,7 +275,8 @@
 
 					// To see if the brand of current product in xml is in Array brands. 
 					if(isInArray(xmlhttp.responseXML.documentElement.getElementsByTagName("brand").item(i).childNodes[0].nodeValue,brands)){					
-						var product=new Product(xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i).childNodes[0].nodeValue,
+						var product=new Product(xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(2*i).childNodes[0].nodeValue,
+								xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(2*i+1).childNodes[0].nodeValue,
 								xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue,
 								xmlhttp.responseXML.documentElement.getElementsByTagName("brand").item(i).childNodes[0].nodeValue,
 								xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue);
@@ -285,9 +289,9 @@
 
 				for(var i=0;i<products.length;i++){
 					document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html"><img src="' 
-								+ (products[i].picture + '_1.jpg')
+								+ (products[i].FPicture)
 								+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html"><img src="'
-								+ (products[i].picture + '_2.jpg')
+								+ (products[i].BPicture)
 								+ '" alt="" class="img-responsive"></a></div></div></div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-responsive"></a><div class="text"><h3><a href="detail.html">'
 								+ products[i].name
 								+ '</a></h3><p class="price">'
