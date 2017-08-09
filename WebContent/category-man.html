@@ -45,98 +45,183 @@
 
 	<script>
 	
-	function findNums(category){
-		
+	var Total = 27;
+	
+	function Product(FPicture,BPicture,price,brand,name)
+	{
+		this.FPicture=FPicture;
+		this.BPicture=BPicture;
+		this.price=price;
+		this.brand=brand;
+		this.name=name;
+	}
+	
+	function showItems(items){
 		/*
-			This function is to find the index of products of the specific category in xml.
+			Parameter: Array of products.
+			function: Show products in division 'products'.
 		*/
 		
-		var start=0;
-		var times=6;
-		// If category is unpredictly to be other String, show as "men".
+		document.getElementById("products").innerHTML="";
+		
+		for(var i in items){			
+			document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'"><img src="' 
+					+ items[i].FPicture
+					+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'"><img src="'
+					+ items[i].BPicture
+					+ '" alt="" class="img-responsive"></a></div></div></div><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'" class="invisible"><img src="img/product1.jpg" alt="" class="img-responsive"></a><div class="text"><h3><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'">'
+					+ items[i].name
+					+ '</a></h3><p class="price">'
+					+ 'AU$' + items[i].price
+					+ '</p><p class="buttons"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'" class="btn btn-default">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p></div></div></div>');
+		}  	
+	}
+	
+	function getItems(category){
+
+		/*
+			This function is to get products of the specific category in xml.
+		*/			
 		
 		
-		// As the sequence of what they are in xml.
+		var itemCategory="menAll";
+		var itemSex="men";
+		
 		switch(category){
 		case "menTShirt":
-			start=0;
-			times=5;
+			itemCategory="T-shirt";
+			itemSex="men";
 			break;
 		case "menShirt":
-			start=5;
-			times=3;
+			itemCategory="shirt";
+			itemSex="men";
 			break;
 		case "menPants":
-			start=8;
-			times=2;
+			itemCategory="pants";
+			itemSex="men";
 			break;
 		case "menAccessory":
-			start=10;
-			times=3;
+			itemCategory="accessory";
+			itemSex="men";
 			break;
 		case "ladyTShirt":
-			start=13;
-			times=4;
+			itemCategory="T-shirt";
+			itemSex="ladies";
 			break;
 		case "ladyShirt":
-			start=17;
-			times=5;
+			itemCategory="shirt";
+			itemSex="ladies";
 			break;
 		case "ladyPants":
-			start=22;
-			times=3;
+			itemCategory="pants";
+			itemSex="ladies";
 			break;
 		case "ladyAccessory":
-			start=25;
-			times=3;
+			itemCategory="accessory";
+			itemSex="ladies";
 			break;
-		case "men":
-			start=0;
-			times=6;
+		case "ladyBag":
+			itemCategory="accessory";
+			itemSex="ladies";
 			break;
-		case "lady":
-			start=13;
-			times=6;
+		case "ladyBelt":
+			itemCategory="accessory";
+			itemSex="ladies";
+			break;
+		case "menBag":
+			itemCategory="accessory";
+			itemSex="men";
+			break;
+		case "menBelt":
+			itemCategory="accessory";
+			itemSex="men";
 			break;
 		}
 			
-			var nums=new Array(start,times);
-			return nums;
-	}
+		var items=new Array();
 		
-		function showProducts(category){
-			/*
-				To display Products information in <div id="products"></div>
-			*/
+		if(!!itemCategory.match("All")){
 			
-			document.getElementById("products").innerHTML = "";
-			var nums=findNums(category);
-			for(var i=nums[0];nums[1]-->0;i++){							 
-					document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'"><img src="' 
-							 										+ (xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2).childNodes[0].nodeValue)
-							 										+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'"><img src="'
-							 										+ (xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2+1).childNodes[0].nodeValue)
-							 										+ '" alt="" class="img-responsive"></a></div></div></div><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'" class="invisible"><img src="img/product1.jpg" alt="" class="img-responsive"></a><div class="text"><h3><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'">'
-							 										+ xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue
-							 										+ '</a></h3><p class="price">'
-							 										+ 'AU$' + xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue
-							 										+ '</p><p class="buttons"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'" class="btn btn-default">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p></div></div></div>');
+			for(var i=0;i<Total;i++){
+				var sex=xmlhttp.responseXML.documentElement.getElementsByTagName("sex")
+						.item(i).childNodes[0].nodeValue;
+				if(sex==itemSex){					
+					var item=new Product(xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2).childNodes[0].nodeValue,
+							xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2+1).childNodes[0].nodeValue,
+							xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue,
+							xmlhttp.responseXML.documentElement.getElementsByTagName("brand").item(i).childNodes[0].nodeValue,
+							xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue);
+					items.push(item);
 				}
-			
-			document.getElementById("belongto").innerHTML = '<li><a href="index.html">Home</a></li>';
-			if(nums[0]<13){
-				// Men.
-				
-				document.getElementById("belongto").innerHTML += '<li>men</li>';
-			}else{
-				// Ladies.
-				
-				document.getElementById("belongto").innerHTML += '<li>ladies</li>';
 			}
 			
-			$("#"+category).addClass("btn default");  		
-			// Make the category in left to be shown as currently chosen.  
+			return items;
 		}
+		
+		if(category=="menBelt" || category=="menBag" || category=="ladyBag" || category=="ladyBelt"){
+			for(var i=0;i<Total;i++){
+				var cat=xmlhttp.responseXML.documentElement.getElementsByTagName("category")
+							.item(i).childNodes[0].nodeValue;
+				var sex=xmlhttp.responseXML.documentElement.getElementsByTagName("sex")
+						.item(i).childNodes[0].nodeValue;
+				if("accessory"==cat && sex==itemSex){
+					var name=xmlhttp.responseXML.documentElement.getElementsByTagName("name")
+								.item(i).childNodes[0].nodeValue;
+					if(((!!name.match("Bag"))&&(!!category.match("Bag"))) ||
+						((!!name.match("Belt"))&&(!!category.match("Belt")))	){
+						var item=new Product(xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2).childNodes[0].nodeValue,
+												xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2+1).childNodes[0].nodeValue,
+												xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue,
+												xmlhttp.responseXML.documentElement.getElementsByTagName("brand").item(i).childNodes[0].nodeValue,
+												name);
+						items.push(item);
+					}
+				}
+			}
+			return items;
+		}
+			
+		for(var i=0;i<Total;i++){
+			var cat=xmlhttp.responseXML.documentElement.getElementsByTagName("category")
+					.item(i).childNodes[0].nodeValue;
+			var sex=xmlhttp.responseXML.documentElement.getElementsByTagName("sex")
+					.item(i).childNodes[0].nodeValue;
+			
+			if(itemCategory==cat && itemSex==sex){				
+				var item=new Product(xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2).childNodes[0].nodeValue,
+										xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2+1).childNodes[0].nodeValue,
+										xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue,
+										xmlhttp.responseXML.documentElement.getElementsByTagName("brand").item(i).childNodes[0].nodeValue,
+										xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue);
+				items.push(item);			
+			}
+		}
+		
+			return items;
+	}		
+		
+	function showProducts(category){
+		/*
+		To display Products information in <div id="products"></div>
+		*/
+		
+		var items=getItems(category);
+		showItems(items);
+		
+		document.getElementById("belongto").innerHTML = '<li><a href="index.html">Home</a></li>';
+		if(!!category.match("lady")){
+			// Ladies.
+			
+			document.getElementById("belongto").innerHTML += '<li>ladies</li>';
+		}else{
+			// Men.
+			
+			document.getElementById("belongto").innerHTML += '<li>men</li>';
+		}
+		$("#"+category).addClass("btn default");
+		// Make the category in left to be shown as currently chosen.  
+		currentItems=items;
+	}
 		function quickSort(products,seq) {
 			/*
 				Copyright Declare:
@@ -171,53 +256,31 @@
 				return quickSort(left,seq).concat([pivot], quickSort(right,seq));
 			}
 		}
-
-		function sort(seq){
+		
+		function Branded(brands,items){
 			/*
-				Sort products by price sequence.
+				Return branded items array.
 			*/
-			
-			document.getElementById("products").innerHTML = "";
-			var nums=findNums(category);
-			function Product(FPicture,BPicture,price,brand,name)
-			{
-				this.FPicture=FPicture;
-				this.BPicture=BPicture;
-				this.price=price;
-				this.brand=brand;
-				this.name=name;
+			var outputItems=new Array();
+			for(i in items){	
+				// To see if the brand of current product in items is in Array brands. 
+				// If not, delete it from items.
+				if(isInArray(items[i].brand,brands)){	
+					outputItems.push(items[i]);
+				}
+					
 			}
-			var products=new Array();
-			for(var i=nums[0],count=0;nums[1]-->0;i++,count++){	
-				var product=new Product(xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2).childNodes[0].nodeValue,
-						xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2+1).childNodes[0].nodeValue,
-						xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue,
-						xmlhttp.responseXML.documentElement.getElementsByTagName("brand").item(i).childNodes[0].nodeValue,
-						xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue);
-				products[count]=product;
-			}
-			// Add currently shown products to Array products.
-			
-			var sortedProducts=quickSort(products,seq);
-			// In sortedProducts, elements are sorted by price.
-			
-			for(var i=0;i<sortedProducts.length;i++){
-				document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'"><img src="' 
-							+ (sortedProducts[i].FPicture)
-							+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'"><img src="'
-							+ (sortedProducts[i].BPicture)
-							+ '" alt="" class="img-responsive"></a></div></div></div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-responsive"></a><div class="text"><h3><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'">'
-							+ sortedProducts[i].name
-							+ '</a></h3><p class="price">'
-							+ 'AU$' + sortedProducts[i].price
-							+ '</p><p class="buttons"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'" class="btn btn-default">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p></div></div></div>');
-			}		
+			// Now all products meet the brand demands are in outputItems.
+			return outputItems;
 		}
 		
 		function isInArray(a,arr){
 			/*
 				To see if a is in Array arr.
 			*/
+			if(!arr){
+				return false;
+			}
 			
 			for(e in arr){
 				if(a==arr[e]){
@@ -231,6 +294,9 @@
 			
 			category=document.location.hash.split("#")[1];
 			// Category is string after "#" in current url; using it to decide what category of products to display.
+			
+			currentItems=null;
+			brandingItems=null;
 			
 			xmlhttp=new XMLHttpRequest();
 			xmlhttp.onreadystatechange=function(){
@@ -262,45 +328,10 @@
 					brands.push("Jack Honey");
 				}
 				// To see if there is any checkbox chosen, and put the brand into Array brands.
-				
-				document.getElementById("products").innerHTML = "";
-				var nums=findNums(category);
-				function Product(FPicture,BPicture,price,brand,name)
-				{
-					this.FPicture=FPicture;
-					this.BPicture=BPicture;
-					this.price=price;
-					this.brand=brand;
-					this.name=name;
-				}
-				var products=new Array();
-				for(var i=nums[0],count=0;nums[1]-->0;i++,count++){	
-						
-						// To see if the brand of current product in xml is in Array brands. 
-						if(isInArray(xmlhttp.responseXML.documentElement.getElementsByTagName("brand").item(i).childNodes[0].nodeValue,brands)){					
-						var product=new Product(xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2).childNodes[0].nodeValue,
-								xmlhttp.responseXML.documentElement.getElementsByTagName("picture").item(i*2+1).childNodes[0].nodeValue,
-								xmlhttp.responseXML.documentElement.getElementsByTagName("price").item(i).childNodes[0].nodeValue,
-								xmlhttp.responseXML.documentElement.getElementsByTagName("brand").item(i).childNodes[0].nodeValue,
-								xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue);
-						products[count]=product;
-					}else{
-						count--;
-					}
-				}
-				// Now all products meet the brand demands are in Array products.
-				
-				for(var i=0;i<products.length;i++){
-					document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'"><img src="' 
-								+ (products[i].FPicture)
-								+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'"><img src="'
-								+ (products[i].BPicture)
-								+ '" alt="" class="img-responsive"></a></div></div></div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-responsive"></a><div class="text"><h3><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'">'
-								+ products[i].name
-								+ '</a></h3><p class="price">'
-								+ 'AU$' + products[i].price
-								+ '</p><p class="buttons"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'" class="btn btn-default">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p></div></div></div>');
-				}	
+
+				var brandedItems=Branded(brands, currentItems);
+				showItems(brandedItems);
+				brandingItems=brandedItems;
 			}); 
 			
  			$("#menShirt").click(function(){
@@ -326,12 +357,46 @@
 			$("#topMenPants").click(function(){
 				document.location.reload();
 			});
+			$("#bottomMenShirt").click(function(){
+				document.location.reload();
+			});
+			$("#bottomMenTShirt").click(function(){
+				document.location.reload();
+			});
+			$("#bottomMenPants").click(function(){
+				document.location.reload();
+			});
+			$("#menBag").click(function(){
+				document.location.reload();
+			});
+			$("#menBelt").click(function(){
+				document.location.reload();
+			});
 			
 			$("#sort-by").change(function(){
 				var seq=$("#sort-by").val();
-				sort(seq);
-			}); 
+				var sortedItems=null;
+				if(!!brandingItems){
+					// If just now showed the branded products.
+					var sacrifice = new Array();
+					for(i in brandingItems){
+						sacrifice[i]=brandingItems[i];
+					}
+					sortedItems=quickSort(sacrifice,seq);
+					
+				}else{
+					sortedItems=quickSort(currentItems,seq);
+					currentItems=sortedItems;
+				}
+				showItems(sortedItems);
+			});
 			
+			$("#clearBrands").click(function(){
+				$("#Armani").prop("checked",false);
+				$("#Versace").prop("checked",false);
+				$("#CarloBruni").prop("checked",false);
+				$("#JackHoney").prop("checked",false);
+			})
 		});
 	</script>
 
@@ -423,10 +488,10 @@
             <div class="navbar-collapse collapse" id="navigation">
 
                 <ul class="nav navbar-nav navbar-left">
-                    <li class="active"><a href="index.html">Home</a>
+                    <li><a href="index.html">Home</a>
                     </li>
 														
-					<li class="dropdown yamm-fw">
+					<li class="dropdown yamm-fw active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Men <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
@@ -463,9 +528,9 @@
                                         <div class="col-sm-6"> <!-- col-sm-3 is changed to col-sm-6 by Shang-->
                                             <h5>Accessories</h5>
                                             <ul>
-                                                <li><a href="category-man.html">Bags</a>
+                                                <li><a href="category-man.html#menBag" id="menBag">Bags</a>
                                                 </li>
-                                                <li><a href="category-man.html">Belts</a>
+                                                <li><a href="category-man.html#menBelt" id="menBelt">Belts</a>
                                                 </li>
 												<!--
                                                 <li><a href="category.html">Hiking shoes</a>
@@ -543,9 +608,9 @@
                                         <div class="col-sm-6"> <!-- col-sm-3 is changed to col-sm-6 by Shang-->
                                             <h5>Accessories</h5>
                                             <ul>
-                                                <li><a href="category-lady.html">Bags</a>
+                                                <li><a href="category-lady.html#ladyBag" id="ladyBag">Bags</a>
                                                 </li>
-                                                <li><a href="category-lady.html">Belts</a>
+                                                <li><a href="category-lady.html#ladyBelt" id="ladyBelt">Belts</a>
                                                 </li>
 												<!--
                                                 <li><a href="category.html">Hiking shoes</a>
@@ -779,7 +844,7 @@
                     <div class="panel panel-default sidebar-menu">
 
                         <div class="panel-heading">
-                            <h3 class="panel-title">Brands <a class="btn btn-xs btn-danger pull-right" href="#"><i class="fa fa-times-circle"></i> Clear</a></h3>
+                            <h3 class="panel-title">Brands <a class="btn btn-xs btn-danger pull-right" href="#" id="clearBrands"><i class="fa fa-times-circle"></i> Clear</a></h3>
                         </div>
 
                         <div class="panel-body">
@@ -842,7 +907,7 @@
                                     <form class="form-inline">
                                         <div class="col-md-6 col-sm-6">
                                             <div class="products-number">
-                                                <strong>Show</strong>  <a href="#" class="btn btn-default btn-sm btn-primary">6</a>  <a href="#" class="btn btn-default btn-sm">12</a>  <a href="#" class="btn btn-default btn-sm">All</a> products
+                                                <strong>Show</strong>  <a href="#" class="btn btn-default btn-sm btn-primary" id="6Products">6</a>  <a href="#" class="btn btn-default btn-sm" id="12Products">12</a>  <a href="#" class="btn btn-default btn-sm" id="allProducts">All</a> products
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
@@ -1171,25 +1236,25 @@
                         <h5>Men</h5>
 
                         <ul>
-                            <li><a href="category-man.html">T-shirts</a>
+                            <li><a href="category-man.html#menTShirt" id="bottomMenTShirt">T-shirts</a>
                             </li>
-                            <li><a href="category-man.html">Shirts</a>
+                            <li><a href="category-man.html#menShirt" id="bottomMenShirt">Shirts</a>
                             </li>
-							<li><a href="category-man.html">Pants</a>
+							<li><a href="category-man.html#menPants" id="bottomMenPants">Pants</a>
                             </li>
-                            <li><a href="category-man.html">Accessories</a>
+                            <li><a href="category-man.html#menAccessory" id="bottomMenAccessory">Accessories</a>
                             </li>
                         </ul>
 
                         <h5>Ladies</h5>
                         <ul>
-                            <li><a href="category-lady.html">T-shirts</a>
+                            <li><a href="category-lady.html#ladyTShirt" id="bottomLadyTShirt">T-shirts</a>
                             </li>
-                            <li><a href="category-lady.html">Shirts</a>
+                            <li><a href="category-lady.html#ladyShirt" id="bottomLadyShirt">Shirts</a>
                             </li>
-                            <li><a href="category-lady.html">Pants</a>
+                            <li><a href="category-lady.html#ladyPants" id="bottomLadyPants">Pants</a>
                             </li>
-                            <li><a href="category-lady.html">Accessories</a>
+                            <li><a href="category-lady.html#ladyAccessory" id="bottomLadyAccessory">Accessories</a>
                             </li>
                         </ul>
 

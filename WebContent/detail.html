@@ -93,11 +93,37 @@
 							document.getElementById("briefBox").innerHTML='<div class="box"><h1 class="text-center">'+product.name+'</h1><p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material & care and sizing</a></p><p class="price">$'+product.price+'</p><p class="text-center buttons"><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a><a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a></p></div>';
 							document.getElementById("details").innerHTML='<p><h4>Product details</h4><p>'+product.detail+'</p><h4>Material & care</h4><ul><li>'+product.material+'</li><li>'+product.care+'</li></ul><h4>Size & Fit</h4><ul><li>'+product.fit+'</li><li>'+product.size+'</li></ul><hr>'
 							// <blockquote><p><em>Define style this season with Armani\'s new range of trendy tops, crafted with intricate details. Create a chic statement look by teaming this lace number with skinny jeans and pumps.</em></p></blockquote>
+							
+							var sex="";
+							var category="";
+							if(product.sex=="men"){
+								sex="men";
+								
+								$("#menBar").addClass("active");
+								document.getElementById("breadcrumb").innerHTML += '<li><a href="category-man.html">men</a></li>';
+							}else{
+								sex="lady";
+								$("#ladiesBar").addClass("active");
+								document.getElementById("breadcrumb").innerHTML += '<li><a href="category-lady.html">ladies</a></li>';
+							}
+							for(e in product.category){
+								category+=product.category[e];
+								if(e==0){
+									category=category.toUpperCase();
+								}
+							}
+							
+							// Make the category in left to be shown as currently chosen.  
+							$("#"+sex+category).addClass("btn default");
+
+							document.getElementById("breadcrumb").innerHTML += '<li>'+product.name+'</li>';
+							
 							break;
 						}						
 					}
 					if(!product){
-						
+						$("#ladiesBar").addClass("active");
+						document.getElementById("breadcrumb").innerHTML += '<li><a href="category-lady.html">ladies</a></li>';
 					}
 				 }
 			}
@@ -482,7 +508,7 @@
             <div class="container">
 
                 <div class="col-md-12">
-                    <ul class="breadcrumb">
+                    <ul class="breadcrumb" id="breadcrumb">
                         <li><a href="index.html">Home</a>
                         </li>
                         <li><a href="category-lady.html">Ladies</a>
@@ -491,7 +517,7 @@
                         <li><a href="#">Tops</a>
                         </li>
 						-->
-                        <li>White Blouse Armani</li>
+                        <!-- <li>White Blouse Armani</li> -->
                     </ul>
 
                 </div>
@@ -507,29 +533,29 @@
 
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked category-menu">
-                                <li>
+                                <li id="menBar">
                                     <a href="category-man.html">Men <span class="badge pull-right">12</span></a>
                                     <ul>
-                                        <li><a href="category-man.html">T-shirts</a>
+                                        <li><a href="category-man.html" id="menT-shirt">T-shirts</a>
                                         </li>
-                                        <li><a href="category-man.html">Shirts</a>
+                                        <li><a href="category-man.html" id="menShirt">Shirts</a>
                                         </li>
-                                        <li><a href="category-man.html">Pants</a>
+                                        <li><a href="category-man.html" id="menPants">Pants</a>
                                         </li>
-                                        <li><a href="category-man.html">Accessories</a>
+                                        <li><a href="category-man.html" id="menAccessory">Accessories</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="active">
+                                <li id="ladiesBar">
                                     <a href="category-lady.html">Ladies  <span class="badge pull-right">12</span></a>
                                     <ul>
-                                        <li><a href="category-lady.html">T-shirts</a>
+                                        <li><a href="category-lady.html" id="ladyT-shirt">T-shirts</a>
                                         </li>
-                                        <li><a href="category-lady.html">Shirts</a>
+                                        <li><a href="category-lady.html" id="ladyShirt">Shirts</a>
                                         </li>
-                                        <li><a href="category-lady.html">Pants</a>
+                                        <li><a href="category-lady.html" id="ladyPants">Pants</a>
                                         </li>
-                                        <li><a href="category-lady.html">Accessories</a>
+                                        <li><a href="category-lady.html" id="ladyAccessory">Accessories</a>
                                         </li>
                                     </ul>
                                 </li>
