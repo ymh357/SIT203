@@ -65,15 +65,15 @@
 		document.getElementById("products").innerHTML="";
 		
 		for(var i in items){			
-			document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'"><img src="' 
+			document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html#'+items[i].name+'"><img src="' 
 					+ items[i].FPicture
-					+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'"><img src="'
+					+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html#'+items[i].name+'"><img src="'
 					+ items[i].BPicture
-					+ '" alt="" class="img-responsive"></a></div></div></div><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'" class="invisible"><img src="img/product1.jpg" alt="" class="img-responsive"></a><div class="text"><h3><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'">'
+					+ '" alt="" class="img-responsive"></a></div></div></div><a href="detail.html#'+items[i].name+'" class="invisible"><img src="img/product1.jpg" alt="" class="img-responsive"></a><div class="text"><h3><a href="detail.html#'+items[i].name+'">'
 					+ items[i].name
 					+ '</a></h3><p class="price">'
 					+ 'AU$' + items[i].price
-					+ '</p><p class="buttons"><a href="detail.html#'+xmlhttp.responseXML.documentElement.getElementsByTagName("name").item(i).childNodes[0].nodeValue+'" class="btn btn-default">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p></div></div></div>');
+					+ '</p><p class="buttons"><a href="detail.html#'+items[i].name+'" class="btn btn-default">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p></div></div></div>');
 		}  	
 	}
 	
