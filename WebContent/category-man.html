@@ -297,6 +297,7 @@
 			
 			currentItems=null;
 			brandingItems=null;
+			groupItems=null;
 			
 			xmlhttp=new XMLHttpRequest();
 			xmlhttp.onreadystatechange=function(){
@@ -384,6 +385,13 @@
 					}
 					sortedItems=quickSort(sacrifice,seq);
 					
+				}else if(!!groupItems){
+					// If just now showed the grouped products.
+					var sacrifice = new Array();
+					for(i in groupItems){
+						sacrifice[i]=groupItems[i];
+					}
+					sortedItems=quickSort(sacrifice,seq);
 				}else{
 					sortedItems=quickSort(currentItems,seq);
 					currentItems=sortedItems;
@@ -398,43 +406,68 @@
 				$("#JackHoney").prop("checked",false);
 			})
 			
-			$("#6Products").click(function(){
+$("#6Products").click(function(){
+				
+				$("#6Products").attr({"disabled":"disabled"});
+				$("#12Products").removeAttr("disabled");
+				$("#allProducts").removeAttr("disabled");
+				
 				$("#6Products").addClass("btn-primary");
 				$("#12Products").removeClass("btn-primary");
 				$("#allProducts").removeClass("btn-primary");
+				
 				if(currentItems.length>6){
 					var sixItems=new Array();
 					for(var i=0;i<6;i++){
 						sixItems[i]=currentItems[i];
 					}
 					showItems(sixItems);
+					groupItems=sixItems;
 				}
 			});
 			$("#12Products").click(function(){
+				$("#12Products").attr({"disabled":"disabled"});
+				$("#6Products").removeAttr("disabled");
+				$("#allProducts").removeAttr("disabled");
+				
 				$("#12Products").addClass("btn-primary");
 				$("#6Products").removeClass("btn-primary");
 				$("#allProducts").removeClass("btn-primary");
+				
 				if(currentItems.length>12){
 					var tlvItems=new Array();
 					for(var i=0;i<12;i++){
 						tlvItems[i]=currentItems[i];
 					}
 					showItems(tlvItems);
+					groupItems=tlvItems;
 				}
 			});
 			$("#allProducts").click(function(){	
+				$("#allProducts").attr({"disabled":"disabled"});
+				$("#6Products").removeAttr("disabled");
+				$("#12Products").removeAttr("disabled");
+				
 				$("#allProducts").addClass("btn-primary");
 				$("#6Products").removeClass("btn-primary");
 				$("#12Products").removeClass("btn-primary");
+				
 				showItems(currentItems);
 			});
 			
 			$("#page1").click(function(){
+				$("#page1").attr({"disabled":"disabled"});
+				$("#page2").removeAttr("disabled");
+				$("#page3").removeAttr("disabled");
+				$("#page4").removeAttr("disabled");
+				$("#page5").removeAttr("disabled");
+				
 				$("#page1").addClass("active");
 				$("#page2").removeClass("active");
 				$("#page3").removeClass("active");
 				$("#page4").removeClass("active");
 				$("#page5").removeClass("active");
+				
 				if(!!$("#6Products").attr("class").match("btn-primary")){
 					if(currentItems.length>6){
 						var sixItems=new Array();
@@ -442,6 +475,7 @@
 							sixItems[i]=currentItems[i];
 						}
 						showItems(sixItems);
+						groupItems=sixItems;
 					}
 				}else if(!!$("#12Products").attr("class").match("btn-primary")){
 					if(currentItems.length>12){
@@ -450,6 +484,7 @@
 							tlvItems[i]=currentItems[i];
 						}
 						showItems(tlvItems);
+						groupItems=tlvItems;
 					}else{
 						showItems(null);
 					}
@@ -467,19 +502,29 @@
 				$("#page4").removeClass("active");
 				$("#page5").removeClass("active");
 				$("#page1").removeClass("active");
+				
+				$("#page2").attr({"disabled":"disabled"});
+				$("#page1").removeAttr("disabled");
+				$("#page3").removeAttr("disabled");
+				$("#page4").removeAttr("disabled");
+				$("#page5").removeAttr("disabled");
 				if(!!$("#6Products").attr("class").match("btn-primary")){
 					if(currentItems.length>12){
 						var sixItems=new Array();
 						for(var i=6;i<12;i++){
-							sixItems[i]=currentItems[i];
+							sixItems[i-6]=currentItems[i];
 						}
 						showItems(sixItems);
+						groupItems=sixItems;
+						alert("a");
+						alert(groupItems.length);
 					}else if(6<currentItems.length && currentItems.length<=12){
 						var sixItems=new Array();
 						for(var i=6;i<currentItems.length;i++){
-							sixItems[i]=currentItems[i];
+							sixItems[i-6]=currentItems[i];
 						}
 						showItems(sixItems);
+						groupItems=sixItems;
 					}else{
 						showItems(null);
 					}
@@ -487,15 +532,17 @@
 					if(currentItems.length>24){
 						var tlvItems=new Array();
 						for(var i=12;i<24;i++){
-							tlvItems[i]=currentItems[i];
+							tlvItems[i-12]=currentItems[i];
 						}
 						showItems(tlvItems);
+						groupItems=tlvItems;
 					}else if(12<currentItems.length&&currentItems.length<=24){
 						var tlvItems=new Array();
 						for(var i=12;i<currentItems.length;i++){
-							tlvItems[i]=currentItems[i];
+							tlvItems[i-12]=currentItems[i];
 						}
 						showItems(tlvItems);
+						groupItems=tlvItems;
 					}else{
 						showItems(null);
 					}
@@ -505,26 +552,36 @@
 					// If all 3 is not selected.
 					// Impossible.
 				}
+
 			});
 			$("#page3").click(function(){
 				$("#page3").addClass("active");
 				$("#page1").removeClass("active");
 				$("#page2").removeClass("active");
-				$("#page3").removeClass("active");
+				$("#page5").removeClass("active");
 				$("#page4").removeClass("active");
+				
+				$("#page3").attr({"disabled":"disabled"});
+				$("#page2").removeAttr("disabled");
+				$("#page1").removeAttr("disabled");
+				$("#page4").removeAttr("disabled");
+				$("#page5").removeAttr("disabled");
+				
 				if(!!$("#6Products").attr("class").match("btn-primary")){
 					if(currentItems.length>18){
 						var sixItems=new Array();
 						for(var i=12;i<18;i++){
-							sixItems[i]=currentItems[i];
+							sixItems[i-12]=currentItems[i];
 						}
 						showItems(sixItems);
+						groupItems=sixItems;
 					}else if(12<currentItems.length && currentItems.length<=18){
 						var sixItems=new Array();
 						for(var i=12;i<currentItems.length;i++){
-							sixItems[i]=currentItems[i];
+							sixItems[i-12]=currentItems[i];
 						}
 						showItems(sixItems);
+						groupItems=sixItems;
 					}else{
 						showItems(null);
 					}
@@ -532,15 +589,17 @@
 					if(currentItems.length>36){
 						var tlvItems=new Array();
 						for(var i=24;i<36;i++){
-							tlvItems[i]=currentItems[i];
+							tlvItems[i-24]=currentItems[i];
 						}
 						showItems(tlvItems);
+						groupItems=tlvItems;
 					}else if(24<currentItems.length&&currentItems.length<=36){
 						var tlvItems=new Array();
 						for(var i=24;i<currentItems.length;i++){
-							tlvItems[i]=currentItems[i];
+							tlvItems[i-24]=currentItems[i];
 						}
 						showItems(tlvItems);
+						groupItems=tlvItems;
 					}else{
 						showItems(null);
 					}
@@ -557,19 +616,28 @@
 				$("#page2").removeClass("active");
 				$("#page3").removeClass("active");
 				$("#page5").removeClass("active");
+				
+				$("#page4").attr({"disabled":"disabled"});
+				$("#page2").removeAttr("disabled");
+				$("#page3").removeAttr("disabled");
+				$("#page1").removeAttr("disabled");
+				$("#page5").removeAttr("disabled");
+				
 				if(!!$("#6Products").attr("class").match("btn-primary")){
 					if(currentItems.length>24){
 						var sixItems=new Array();
 						for(var i=18;i<24;i++){
-							sixItems[i]=currentItems[i];
+							sixItems[i-18]=currentItems[i];
 						}
 						showItems(sixItems);
+						groupItems=sixItems;
 					}else if(18<currentItems.length && currentItems.length<=24){
 						var sixItems=new Array();
 						for(var i=18;i<currentItems.length;i++){
-							sixItems[i]=currentItems[i];
+							sixItems[i-18]=currentItems[i];
 						}
 						showItems(sixItems);
+						groupItems=sixItems;
 					}else{
 						showItems(null);
 					}
@@ -577,15 +645,17 @@
 					if(currentItems.length>48){
 						var tlvItems=new Array();
 						for(var i=36;i<48;i++){
-							tlvItems[i]=currentItems[i];
+							tlvItems[i-36]=currentItems[i];
 						}
 						showItems(tlvItems);
+						groupItems=tlvItems;
 					}else if(36<currentItems.length&&currentItems.length<=48){
 						var tlvItems=new Array();
 						for(var i=36;i<currentItems.length;i++){
-							tlvItems[i]=currentItems[i];
+							tlvItems[i-36]=currentItems[i];
 						}
 						showItems(tlvItems);
+						groupItems=tlvItems;
 					}else{
 						showItems(null);
 					}
@@ -602,19 +672,28 @@
 				$("#page2").removeClass("active");
 				$("#page3").removeClass("active");
 				$("#page4").removeClass("active");
+				
+				$("#page5").attr({"disabled":"disabled"});
+				$("#page2").removeAttr("disabled");
+				$("#page3").removeAttr("disabled");
+				$("#page4").removeAttr("disabled");
+				$("#page1").removeAttr("disabled");
+				
 				if(!!$("#6Products").attr("class").match("btn-primary")){
 					if(currentItems.length>6){
 						var sixItems=new Array();
 						for(var i=24;i<30;i++){
-							sixItems[i]=currentItems[i];
+							sixItems[i-24]=currentItems[i];
 						}
 						showItems(sixItems);
+						groupItems=sixItems;
 					}else if(24<currentItems.length && currentItems.length<=30){
 						var sixItems=new Array();
 						for(var i=24;i<currentItems.length;i++){
-							sixItems[i]=currentItems[i];
+							sixItems[i-24]=currentItems[i];
 						}
 						showItems(sixItems);
+						groupItems=sixItems;
 					}else{
 						showItems(null);
 					}
@@ -622,15 +701,17 @@
 					if(currentItems.length>60){
 						var tlvItems=new Array();
 						for(var i=48;i<60;i++){
-							tlvItems[i]=currentItems[i];
+							tlvItems[i-48]=currentItems[i];
 						}
 						showItems(tlvItems);
+						groupItems=tlvItems;
 					}else if(48<currentItems.length&&currentItems.length<=60){
 						var tlvItems=new Array();
 						for(var i=48;i<currentItems.length;i++){
-							tlvItems[i]=currentItems[i];
+							tlvItems[i-48]=currentItems[i];
 						}
 						showItems(tlvItems);
+						groupItems=tlvItems;
 					}else{
 						showItems(null);
 					}
@@ -1151,7 +1232,7 @@
                                     <form class="form-inline">
                                         <div class="col-md-6 col-sm-6">
                                             <div class="products-number">
-                                                <strong>Show</strong>  <a href="#" class="btn btn-default btn-sm" id="6Products">6</a>  <a href="#" class="btn btn-default btn-sm" id="12Products">12</a>  <a href="#" class="btn btn-default btn-sm btn-primary" id="allProducts">All</a> products
+                                                <strong>Show</strong>  <a href="#" class="btn btn-default btn-sm" id="6Products">6</a>  <a href="#" class="btn btn-default btn-sm" id="12Products">12</a>  <a href="#" class="btn btn-default btn-sm btn-primary" id="allProducts" disabled="disabled">All</a> products
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
