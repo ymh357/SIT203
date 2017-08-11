@@ -44,7 +44,7 @@
 		}
 	</style>
 
-	<script>
+	<script type="text/javascript">
 	
 	var Total = 27;
 	
@@ -221,6 +221,7 @@
 				document.getElementById("belongto").innerHTML += '<li>ladies</li>';
 			}
 			$("#"+category).addClass("btn default");
+			
 			// Make the category in left to be shown as currently chosen. 
 			currentItems=items;
 		}
@@ -301,7 +302,6 @@
 			xmlhttp.onreadystatechange=function(){
 				 if ( xmlhttp.readyState == 4 && 
 			        	xmlhttp.status == 200 &&  xmlhttp.responseXML ){
-					
 					// When open category-lady.html.
 					if(!category){
 						 category="lady";
@@ -335,43 +335,101 @@
 			$("#ladyTShirt").click(function(){
  				
 				// Anchor towards content inside current page will not reload the page; So reload the page manually.  
-				document.location.reload();
+				category=$("#ladyTShirt").attr("href").split("#")[1];
+				document.location.replace("category-lady.html#"+category);
+				location.reload();
+				return false;
 			});
 			$("#ladyShirt").click(function(){
-				document.location.reload();
+				// Anchor towards content inside current page will not reload the page; So reload the page manually.  
+				// document.location.reload();
+				category=$("#ladyShirt").attr("href").split("#")[1];
+				document.location.replace("category-lady.html#"+category);
+				location.reload();
+				return false;
 			});
 			$("#ladyPants").click(function(){
-				document.location.reload();
+				// Anchor towards content inside current page will not reload the page; So reload the page manually.  
+				// document.location.reload();
+				category=$("#ladyPants").attr("href").split("#")[1];
+				document.location.replace("category-lady.html#"+category);
+				location.reload();
+				return false;
 			});
 			$("#ladyAccessory").click(function(){
-				document.location.reload();
+				// Anchor towards content inside current page will not reload the page; So reload the page manually.  
+				// document.location.reload();
+				category=$("#ladyAccessory").attr("href").split("#")[1];
+				document.location.replace("category-lady.html#"+category);
+				location.reload();
+				return false;
 			});
 			
 			$("#topLadyTShirt").click(function(){
-				document.location.reload();
+				// Anchor towards content inside current page will not reload the page; So reload the page manually.  
+				// document.location.reload();
+				category=$("#topLadyTShirt").attr("href").split("#")[1];
+				document.location.replace("category-lady.html#"+category);
+				location.reload();
+				return false;
 			});
 			$("#topLadyShirt").click(function(){
-				document.location.reload();
+				// Anchor towards content inside current page will not reload the page; So reload the page manually.  
+				// document.location.reload();
+				category=$("#topLadyShirt").attr("href").split("#")[1];
+				document.location.replace("category-lady.html#"+category);
+				location.reload();
+				return false;
 			});
 			$("#topLadyPants").click(function(){
-				document.location.reload();
+				// Anchor towards content inside current page will not reload the page; So reload the page manually.  
+				// document.location.reload();
+				category=$("#topLadyPants").attr("href").split("#")[1];
+				
+				showProducts(category);
+				return false;
 			});
 			$("#bottomLadyTShirt").click(function(){
-				document.location.reload();
+				// Anchor towards content inside current page will not reload the page; So reload the page manually.  
+				// document.location.reload();
+				category=$("#bottomLadyTShirt").attr("href").split("#")[1];
+				
+				showProducts(category);
+				return false;
 			});
 			$("#bottomLadyShirt").click(function(){
-				document.location.reload();
+				// Anchor towards content inside current page will not reload the page; So reload the page manually.  
+				// document.location.reload();
+				category=$("#bottomLadyShirt").attr("href").split("#")[1];
+				document.location.replace("category-lady.html#"+category);
+				location.reload();
+				return false;
 			});
 			$("#bottomLadyPants").click(function(){
-				document.location.reload();
+				// Anchor towards content inside current page will not reload the page; So reload the page manually.  
+				// document.location.reload();
+				category=$("#bottomLadyPants").attr("href").split("#")[1];
+				document.location.replace("category-lady.html#"+category);
+				location.reload();
+				return false;
 			});
 			
 			$("#ladyBag").click(function(){
-				document.location.reload();
+				// Anchor towards content inside current page will not reload the page; So reload the page manually.  
+				// document.location.reload();
+				category=$("#ladyBag").attr("href").split("#")[1];
+				document.location.replace("category-lady.html#"+category);
+				location.reload();
+				return false;
 			});
 			$("#ladyBelt").click(function(){
-				document.location.reload();
-			});
+				// Anchor towards content inside current page will not reload the page; So reload the page manually.  
+				// document.location.reload();
+				category=$("#ladyBelt").attr("href").split("#")[1];
+				document.location.replace("category-lady.html#"+category);
+				location.reload();
+				return false;
+			});  
 			
 			
 			$("#sort-by").change(function(){

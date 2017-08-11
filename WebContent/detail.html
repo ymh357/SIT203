@@ -51,9 +51,9 @@
 		var Total=27;
 		
 		$(document).ready(function(){
-			
 			// Category is string after "#" in current url; using it to decide what category of products to display.
-			productName=document.location.hash.split("#")[1];	
+			encodedStr=document.location.hash.split("#")[1];
+			productName=decodeURIComponent(encodedStr);	
 			var product=null;
 
 			xmlhttp=new XMLHttpRequest();
@@ -128,11 +128,10 @@
 				 }
 			}
 			xmlhttp.open("GET","products.xml",true);
-			xmlhttp.send();
-			
-		})
+			xmlhttp.send();			
+		 });
 	</script>
-
+	
 </head>
 
 <body>
