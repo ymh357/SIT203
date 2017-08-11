@@ -86,8 +86,11 @@
 		*/
 		
 		document.getElementById("products").innerHTML="";
+		if(items==null || items.length==0){
+			return;
+		}		
 		
-		for(var i in items){			
+		for(var i=0;i<items.length;i++){			
 			document.getElementById("products").innerHTML += ('<div class="col-md-4 col-sm-6"><div class="product"><div class="flip-container"><div class="flipper"><div class="front"><a href="detail.html#'+items[i].name+'"><img src="' 
 					+ items[i].FPicture
 					+ '" alt="" class="img-responsive"></a></div><div class="back"><a href="detail.html#'+items[i].name+'"><img src="'
@@ -549,6 +552,7 @@
 			
 			$("#page1").click(function(){
 				$("#page1").attr({"disabled":"disabled"});
+				$("#backwardPage").attr({"disabled":"disabled"});
 				$("#page2").removeAttr("disabled");
 				$("#page3").removeAttr("disabled");
 				$("#page4").removeAttr("disabled");
@@ -561,14 +565,14 @@
 				$("#page5").removeClass("active");
 				
 				if(!!$("#6Products").attr("class").match("btn-primary")){
-					if(beforeDevidedItems.length>6){
+					if(beforeDevidedItems.length>=6){
 						var sixItems=new Array();
 						for(var i=0;i<6;i++){
 							sixItems[i-0]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
 						currentDisplayedItems=sixItems;
-					}else if(beforeDevidedItems.length>0 && beforeDevidedItems.length<=6){
+					}else if(beforeDevidedItems.length>0 && beforeDevidedItems.length<6){
 						var sixItems=new Array();
 						for(var i=0;i<beforeDevidedItems.length;i++){
 							sixItems[i-0]=beforeDevidedItems[i];
@@ -577,14 +581,14 @@
 						currentDisplayedItems=sixItems;
 					}
 				}else if(!!$("#12Products").attr("class").match("btn-primary")){
-					if(beforeDevidedItems.length>12){
+					if(beforeDevidedItems.length>=12){
 						var tlvItems=new Array();
 						for(var i=0;i<12;i++){
 							tlvItems[i-0]=beforeDevidedItems[i];
 						}
 						showItems(tlvItems);
 						currentDisplayedItems=tlvItems;
-					}else if(0<beforeDevidedItems.length && beforeDevidedItems.length<=12){
+					}else if(0<beforeDevidedItems.length && beforeDevidedItems.length<12){
 						var tlvItems=new Array();
 						for(var i=0;i<beforeDevidedItems.length;i++){
 							tlvItems[i-0]=beforeDevidedItems[i];
@@ -618,14 +622,14 @@
 				$("#page4").removeAttr("disabled");
 				$("#page5").removeAttr("disabled");
 				if(!!$("#6Products").attr("class").match("btn-primary")){
-					if(beforeDevidedItems.length>12){
+					if(beforeDevidedItems.length>=12){
 						var sixItems=new Array();
 						for(var i=6;i<12;i++){
 							sixItems[i-6]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
 						currentDisplayedItems=sixItems;
-					}else if(6<beforeDevidedItems.length && beforeDevidedItems.length<=12){
+					}else if(6<beforeDevidedItems.length && beforeDevidedItems.length<12){
 						var sixItems=new Array();
 						for(var i=6;i<beforeDevidedItems.length;i++){
 							sixItems[i-6]=beforeDevidedItems[i];
@@ -637,14 +641,14 @@
 						currentDisplayedItems=null;
 					}
 				}else if(!!$("#12Products").attr("class").match("btn-primary")){
-					if(beforeDevidedItems.length>24){
+					if(beforeDevidedItems.length>=24){
 						var tlvItems=new Array();
 						for(var i=12;i<24;i++){
 							tlvItems[i-12]=beforeDevidedItems[i];
 						}
 						showItems(tlvItems);
 						currentDisplayedItems=tlvItems;
-					}else if(12<beforeDevidedItems.length&&beforeDevidedItems.length<=24){
+					}else if(12<beforeDevidedItems.length&&beforeDevidedItems.length<24){
 						var tlvItems=new Array();
 						for(var i=12;i<beforeDevidedItems.length;i++){
 							tlvItems[i-12]=beforeDevidedItems[i];
@@ -678,14 +682,14 @@
 				$("#page5").removeAttr("disabled");
 				
 				if(!!$("#6Products").attr("class").match("btn-primary")){
-					if(beforeDevidedItems.length>18){
+					if(beforeDevidedItems.length>=18){
 						var sixItems=new Array();
 						for(var i=12;i<18;i++){
 							sixItems[i-12]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
 						currentDisplayedItems=sixItems;
-					}else if(12<beforeDevidedItems.length && beforeDevidedItems.length<=18){
+					}else if(12<beforeDevidedItems.length && beforeDevidedItems.length<18){
 						var sixItems=new Array();
 						for(var i=12;i<beforeDevidedItems.length;i++){
 							sixItems[i-12]=beforeDevidedItems[i];
@@ -697,14 +701,14 @@
 						currentDisplayedItems=null;
 					}
 				}else if(!!$("#12Products").attr("class").match("btn-primary")){
-					if(beforeDevidedItems.length>36){
+					if(beforeDevidedItems.length>=36){
 						var tlvItems=new Array();
 						for(var i=24;i<36;i++){
 							tlvItems[i-24]=beforeDevidedItems[i];
 						}
 						showItems(tlvItems);
 						currentDisplayedItems=tlvItems;
-					}else if(24<beforeDevidedItems.length&&beforeDevidedItems.length<=36){
+					}else if(24<beforeDevidedItems.length&&beforeDevidedItems.length<36){
 						var tlvItems=new Array();
 						for(var i=24;i<beforeDevidedItems.length;i++){
 							tlvItems[i-24]=beforeDevidedItems[i];
@@ -735,14 +739,14 @@
 				$("#page5").removeAttr("disabled");
 				
 				if(!!$("#6Products").attr("class").match("btn-primary")){
-					if(beforeDevidedItems.length>24){
+					if(beforeDevidedItems.length>=24){
 						var sixItems=new Array();
 						for(var i=18;i<24;i++){
 							sixItems[i-18]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
 						currentDisplayedItems=sixItems;
-					}else if(18<beforeDevidedItems.length && beforeDevidedItems.length<=24){
+					}else if(18<beforeDevidedItems.length && beforeDevidedItems.length<24){
 						var sixItems=new Array();
 						for(var i=18;i<beforeDevidedItems.length;i++){
 							sixItems[i-18]=beforeDevidedItems[i];
@@ -754,14 +758,14 @@
 						currentDisplayedItems=null;
 					}
 				}else if(!!$("#12Products").attr("class").match("btn-primary")){
-					if(beforeDevidedItems.length>48){
+					if(beforeDevidedItems.length>=48){
 						var tlvItems=new Array();
 						for(var i=36;i<48;i++){
 							tlvItems[i-36]=beforeDevidedItems[i];
 						}
 						showItems(tlvItems);
 						currentDisplayedItems=tlvItems;
-					}else if(36<beforeDevidedItems.length&&beforeDevidedItems.length<=48){
+					}else if(36<beforeDevidedItems.length&&beforeDevidedItems.length<48){
 						var tlvItems=new Array();
 						for(var i=36;i<beforeDevidedItems.length;i++){
 							tlvItems[i-36]=beforeDevidedItems[i];
@@ -788,20 +792,21 @@
 				$("#page4").removeClass("active");
 				
 				$("#page5").attr({"disabled":"disabled"});
+				$("#forwardPage").attr({"disabled":"disabled"});
 				$("#page2").removeAttr("disabled");
 				$("#page3").removeAttr("disabled");
 				$("#page4").removeAttr("disabled");
 				$("#page1").removeAttr("disabled");
 				
 				if(!!$("#6Products").attr("class").match("btn-primary")){
-					if(beforeDevidedItems.length>6){
+					if(beforeDevidedItems.length>=30){
 						var sixItems=new Array();
 						for(var i=24;i<30;i++){
 							sixItems[i-24]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
 						currentDisplayedItems=sixItems;
-					}else if(24<beforeDevidedItems.length && beforeDevidedItems.length<=30){
+					}else if(24<beforeDevidedItems.length && beforeDevidedItems.length<30){
 						var sixItems=new Array();
 						for(var i=24;i<beforeDevidedItems.length;i++){
 							sixItems[i-24]=beforeDevidedItems[i];
@@ -813,14 +818,14 @@
 						currentDisplayedItems=null;
 					}
 				}else if(!!$("#12Products").attr("class").match("btn-primary")){
-					if(beforeDevidedItems.length>60){
+					if(beforeDevidedItems.length>=60){
 						var tlvItems=new Array();
 						for(var i=48;i<60;i++){
 							tlvItems[i-48]=beforeDevidedItems[i];
 						}
 						showItems(tlvItems);
 						currentDisplayedItems=tlvItems;
-					}else if(48<beforeDevidedItems.length&&beforeDevidedItems.length<=60){
+					}else if(48<beforeDevidedItems.length&&beforeDevidedItems.length<60){
 						var tlvItems=new Array();
 						for(var i=48;i<beforeDevidedItems.length;i++){
 							tlvItems[i-48]=beforeDevidedItems[i];
@@ -837,6 +842,23 @@
 				}else{
 					// If all 3 is not selected.
 					// Impossible.
+				}
+			});
+			$("#backwardPage").click(function(){
+				for(var i=1;i<=5;i++){
+					if($("#page"+i).attr("disabled")=="disabled"){
+						$("#page"+(i-1)).trigger("click");
+						break;
+					}	
+				}
+			});
+			
+			$("#forwardPage").click(function(){
+				for(var i=1;i<=5;i++){
+					if($("#page"+i).attr("disabled")=="disabled"){
+						$("#page"+(i+1)).trigger("click");
+						break;
+					}	
 				}
 			});
 		});
@@ -1610,7 +1632,7 @@
 						 end of comment -->
 
                         <ul class="pagination">
-                            <li><a href="#">&laquo;</a>
+                            <li><a href="#" id="backwardPage">&laquo;</a>
                             </li>
                             <li class="active" id="page1"><a href="#">1</a>
                             </li>
@@ -1622,7 +1644,7 @@
                             </li>
                             <li id="page5"><a href="#" >5</a>
                             </li>
-                            <li><a href="#">&raquo;</a>
+                            <li><a href="#" id="forwardPage">&raquo;</a>
                             </li>
                         </ul>
                     </div>
