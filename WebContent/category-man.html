@@ -45,7 +45,6 @@
 
 	<script type="text/javascript">
 	
-	var Total = 27;
 	
 	function Product(FPicture,BPicture,price,brand,name)
 	{
@@ -55,6 +54,30 @@
 		this.brand=brand;
 		this.name=name;
 	}
+	
+	function getProductNumber(){
+		/*
+			Get total number of products in numArray[0].
+			Get men products number in numArray[1].
+			Get ladies products number in numArray[2].
+			Return numArray.
+		*/
+		var numArray=new Array(3);
+		numArray[0]=0;
+		numArray[1]=0;
+		numArray[2]=0;
+		allSexTags=xmlhttp.responseXML.documentElement.getElementsByTagName("sex");
+		numArray[0]=allSexTags.length;
+		for(var i=0;i<allSexTags.length;i++){
+			if(allSexTags.item(i).childNodes[0].nodeValue=="men"){
+				numArray[1]++;
+			}else{
+				numArray[2]++;
+			}
+		}
+		return numArray;
+	}
+	
 	
 	function showItems(items){
 		/*
@@ -304,10 +327,16 @@
 				 if ( xmlhttp.readyState == 4 && 
 			        	xmlhttp.status == 200 &&  xmlhttp.responseXML ){
 					 
+					 Total = getProductNumber()[0];
+					 
 					 // When open category-man.html.
 					 if(!category){
 						 category="men";
 					 }
+					 
+					 $("#menNum").html(getProductNumber()[1]);
+					 $("#ladyNum").html(getProductNumber()[2]);
+					 
 					 showProducts(category);
 				 }
 			}
@@ -442,7 +471,7 @@
 				$("#JackHoney").prop("checked",false);
 			})
 			
-$("#6Products").click(function(){
+			$("#6Products").click(function(){
 				
 				$("#6Products").attr({"disabled":"disabled"});
 				$("#12Products").removeAttr("disabled");
@@ -452,6 +481,7 @@ $("#6Products").click(function(){
 				$("#12Products").removeClass("btn-primary");
 				$("#allProducts").removeClass("btn-primary");
 				
+				
 				if(currentItems.length>6){
 					var sixItems=new Array();
 					for(var i=0;i<6;i++){
@@ -460,6 +490,7 @@ $("#6Products").click(function(){
 					showItems(sixItems);
 					groupItems=sixItems;
 				}
+				$("#page1").trigger("click");
 			});
 			$("#12Products").click(function(){
 				$("#12Products").attr({"disabled":"disabled"});
@@ -470,6 +501,7 @@ $("#6Products").click(function(){
 				$("#6Products").removeClass("btn-primary");
 				$("#allProducts").removeClass("btn-primary");
 				
+				
 				if(currentItems.length>12){
 					var tlvItems=new Array();
 					for(var i=0;i<12;i++){
@@ -478,6 +510,7 @@ $("#6Products").click(function(){
 					showItems(tlvItems);
 					groupItems=tlvItems;
 				}
+				$("#page1").trigger("click");
 			});
 			$("#allProducts").click(function(){	
 				$("#allProducts").attr({"disabled":"disabled"});
@@ -488,7 +521,9 @@ $("#6Products").click(function(){
 				$("#6Products").removeClass("btn-primary");
 				$("#12Products").removeClass("btn-primary");
 				
+				
 				showItems(currentItems);
+				$("#page1").trigger("click");
 			});
 			
 			$("#page1").click(function(){
@@ -508,7 +543,14 @@ $("#6Products").click(function(){
 					if(currentItems.length>6){
 						var sixItems=new Array();
 						for(var i=0;i<6;i++){
-							sixItems[i]=currentItems[i];
+							sixItems[i-0]=currentItems[i];
+						}
+						showItems(sixItems);
+						groupItems=sixItems;
+					}else if(currentItems.length>0 && currentItems.length<=6){
+						var sixItems=new Array();
+						for(var i=0;i<currentItems.length;i++){
+							sixItems[i-0]=currentItems[i];
 						}
 						showItems(sixItems);
 						groupItems=sixItems;
@@ -517,10 +559,17 @@ $("#6Products").click(function(){
 					if(currentItems.length>12){
 						var tlvItems=new Array();
 						for(var i=0;i<12;i++){
-							tlvItems[i]=currentItems[i];
+							tlvItems[i-0]=currentItems[i];
 						}
 						showItems(tlvItems);
 						groupItems=tlvItems;
+					}else if(0<currentItems.length && currentItems.length<=12){
+						var sixItems=new Array();
+						for(var i=0;i<currentItems.length;i++){
+							sixItems[i-0]=currentItems[i];
+						}
+						showItems(sixItems);
+						groupItems=sixItems;
 					}else{
 						showItems(null);
 					}
@@ -552,8 +601,6 @@ $("#6Products").click(function(){
 						}
 						showItems(sixItems);
 						groupItems=sixItems;
-						alert("a");
-						alert(groupItems.length);
 					}else if(6<currentItems.length && currentItems.length<=12){
 						var sixItems=new Array();
 						for(var i=6;i<currentItems.length;i++){
@@ -1156,7 +1203,7 @@ $("#6Products").click(function(){
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked category-menu">
                                 <li class="active">
-                                    <a href="category-man.html">Men <span class="badge pull-right">12</span></a>
+                                    <a href="category-man.html">Men <span class="badge pull-right" id="menNum"></span></a>
                                     <ul>
                                         <li><a href="category-man.html#menTShirt" id="menTShirt">T-shirts</a>
                                         </li>
@@ -1169,7 +1216,7 @@ $("#6Products").click(function(){
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="category-lady.html">Ladies  <span class="badge pull-right">12</span></a>
+                                    <a href="category-lady.html">Ladies  <span class="badge pull-right" id="ladyNum"></span></a>
                                     <ul>
                                         <li><a href="category-lady.html#ladyTShirt" id="ladyTShirt">T-shirts</a>
                                         </li>
@@ -1213,23 +1260,23 @@ $("#6Products").click(function(){
                             <form>
                                 <div class="form-group">
                                     <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="Armani">Armani (10)
+                                        <label id="ArmaniLabel">
+                                            <input type="checkbox" id="Armani" checked="checked">Armani (11)
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" id="Versace">Versace (10)
+                                            <input type="checkbox" id="Versace" checked="checked">Versace (11)
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" id="CarloBruni">Carlo Bruni (2)
+                                            <input type="checkbox" id="CarloBruni" checked="checked">Carlo Bruni (2)
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" id="JackHoney">Jack Honey (2)
+                                            <input type="checkbox" id="JackHoney" checked="checked">Jack Honey (3)
                                         </label>
                                     </div>
                                 </div>
