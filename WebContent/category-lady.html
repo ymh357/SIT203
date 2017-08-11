@@ -272,6 +272,20 @@
 			return false;
 		}
 		
+		function getBrandNum(brandName){
+			/*
+				Get number of products of brandName.
+			*/
+			var count=0;
+			for(var i=0;i<Total;i++){
+				var nodeValue=xmlhttp.responseXML.documentElement.getElementsByTagName("brand").item(i).childNodes[0].nodeValue;
+				if(nodeValue==brandName){
+					count++;
+				}
+			}
+			return count;
+		}
+		
 		function Branded(brands,items){
 			/*
 			Return branded items array.
@@ -309,6 +323,12 @@
 					// Set men products and lady products number.
 					$("#menNum").html(getProductNumber()[1]);
 					$("#ladyNum").html(getProductNumber()[2]);
+
+					 document.getElementById('ArmaniLabel').innerHTML='<input type="checkbox" id="Armani" checked="checked">Armani  ('+ getBrandNum("Armani") +')';
+					 document.getElementById('VersaceLabel').innerHTML='<input type="checkbox" id="Versace" checked="checked">Versace  ('+ getBrandNum('Versace') +')';
+					 document.getElementById('CarloBruniLabel').innerHTML='<input type="checkbox" id="CarloBruni" checked="checked">Carlo Bruni  ('+ getBrandNum('Carlo Bruni') +')';
+					 document.getElementById('JackHoneyLabel').innerHTML='<input type="checkbox" id="JackHoney" checked="checked">Jack Honey  ('+ getBrandNum('Jack Honey') +')';
+					
 					 
 					// When open category-lady.html.
 					if(!category){
@@ -1333,23 +1353,23 @@
                             <form>
                                 <div class="form-group">
                                     <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="Armani" checked="checked">Armani (11)
+                                        <label id="ArmaniLabel">
+                                            <!-- <input type="checkbox" id="Armani" checked="checked">Armani (11) -->
                                         </label>
                                     </div>
                                     <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="Versace" checked="checked">Versace (11)
+                                        <label id="VersaceLabel">
+                                           <!--  <input type="checkbox" id="Versace" checked="checked">Versace (11) -->
                                         </label>
                                     </div>
                                     <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="CarloBruni" checked="checked">Carlo Bruni (2)
+                                        <label id="CarloBruniLabel">
+                                            <!-- <input type="checkbox" id="CarloBruni" checked="checked">Carlo Bruni (2) -->
                                         </label>
                                     </div>
                                     <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="JackHoney" checked="checked">Jack Honey (3)
+                                        <label id="JackHoneyLabel">
+                                            <!-- <input type="checkbox" id="JackHoney" checked="checked">Jack Honey (3) -->
                                         </label>
                                     </div>
                                 </div>
