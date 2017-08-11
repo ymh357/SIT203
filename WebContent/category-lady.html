@@ -221,31 +221,6 @@
 		}
 			return items;
 	}		
-	
-		
-		function showProducts(category){
-			/*
-			To display Products information in <div id="products"></div>
-			*/
-			
-			var items=getItems(category);
-			showItems(items);
-			
-			document.getElementById("belongto").innerHTML = '<li><a href="index.html">Home</a></li>';
-			if(!!category.match("men")){
-				// Men.
-				
-				document.getElementById("belongto").innerHTML += '<li>men</li>';
-			}else{
-				// Ladies.
-				
-				document.getElementById("belongto").innerHTML += '<li>ladies</li>';
-			}
-			$("#"+category).addClass("btn default");
-			
-			// Make the category in left to be shown as currently chosen. 
-			currentItems=items;
-		}
 			
 		function quickSort(products,seq) {
 			/*
@@ -299,7 +274,7 @@
 			Return branded items array.
 			*/
 			var outputItems=new Array();
-			for(i in items){	
+			for(var i=0;i<items.length;i++){	
 				// To see if the brand of current product in items is in Array brands. 
 				// If not, delete it from items.
 				if(isInArray(items[i].brand,brands)){	
@@ -315,9 +290,11 @@
 			
 			category=document.location.hash.split("#")[1];
 			// Category is string after "#" in current url; using it to decide what category of products to display.
-			currentItems=null;
-			brandingItems=null;
-			groupItems=null;
+			
+			beforeDevidedItems=null;	// Products before devided into apges. Each element with certain sequence. 
+			currentDisplayedItems=null;	// Products currently shown in div. Each element without certain sequence.
+			groupItems=null;			// Products of chosen group of number. 
+			beforeBrandedItems=null;	// Products before branded. Using it to prevent errors from changing select options of brands.
 			
 			xmlhttp=new XMLHttpRequest();
 			xmlhttp.onreadystatechange=function(){
@@ -325,6 +302,8 @@
 			        	xmlhttp.status == 200 &&  xmlhttp.responseXML ){
 					
 					Total = getProductNumber()[0];
+					
+					// Set men products and lady products number.
 					$("#menNum").html(getProductNumber()[1]);
 					$("#ladyNum").html(getProductNumber()[2]);
 					 
@@ -333,13 +312,38 @@
 						 category="lady";
 					}
 					
-					showProducts(category);
+					var items=getItems(category);
+					showItems(items);
+					
+					document.getElementById("belongto").innerHTML = '<li><a href="index.html">Home</a></li>';
+					if(!!category.match("men")){
+						// Men.
+						
+						document.getElementById("belongto").innerHTML += '<li>men</li>';
+					}else{
+						// Ladies.
+						
+						document.getElementById("belongto").innerHTML += '<li>ladies</li>';
+					}
+					$("#"+category).addClass("btn default");
+					
+					// Make the category in left to be shown as currently chosen. 
+					beforeDevidedItems=items;
+					currentDisplayedItems=items;
+					beforeBrandedItems=items;
 				 }
 			}
 			xmlhttp.open("GET","products.xml",true);
 			xmlhttp.send();
 			
 			$("#applyBtn").click(function(){
+				/*
+					1. Brand beforeBrandedItems.
+					2. To see if any sequence has been chosen. If yes, sort branded products.
+					3. Show sortedBrandedItems or non-sequence branded items.
+					4. Change currentDisplayedItems and beforeDevidedItems.
+					5. Trigger $("#allProducts").
+				*/
 				var brands=new Array();
 				if($("#Armani").prop("checked")){
 					brands.push("Armani");
@@ -355,9 +359,26 @@
 				}
 				// To see if there is any checkbox chosen, and put the brand into Array brands.
 
-				var brandedItems=Branded(brands, currentItems);
-				showItems(brandedItems);
-				brandingItems=brandedItems;
+				// Branded products that shown in the div and show after that.
+				var brandedItems=Branded(brands, beforeBrandedItems);
+								
+				// To make brandedItems to display as chosen sequence.
+				
+				var sortedBrandedItems=null;
+				var seq=$("#sort-by").val();
+				
+				// If seq has not been chosen.
+				if(seq==null){
+					sortedBrandedItems=brandedItems;
+				}else{
+					sortedBrandedItems=quickSort(brandedItems, seq);
+				}			
+				showItems(sortedBrandedItems);
+				// Change currentDisplayedItems and beforeDevidedItems.
+				currentDisplayedItems=sortedBrandedItems;
+				beforeDevidedItems=sortedBrandedItems;
+				
+				$("#allProducts").trigger("click");
 			}); 
 			$("#ladyTShirt").click(function(){
  				
@@ -460,28 +481,25 @@
 			
 			
 			$("#sort-by").change(function(){
+				/*
+					1. Sort what are displayed.
+					2. Display sorted products.
+					3. Change currentDisplayedItems and beforeDevidedItems.
+					4. trigger $("#allProducts").
+				*/
 				var seq=$("#sort-by").val();
 				var sortedItems=null;
-				if(!!brandingItems){
-					// If just now showed the branded products.
-					var sacrifice = new Array();
-					for(i in brandingItems){
-						sacrifice[i]=brandingItems[i];
-					}
-					sortedItems=quickSort(sacrifice,seq);
-					
-				}else if(!!groupItems){
-					// If just now showed the grouped products.
-					var sacrifice = new Array();
-					for(i in groupItems){
-						sacrifice[i]=groupItems[i];
-					}				
-					sortedItems=quickSort(sacrifice,seq);
-				}else{
-					sortedItems=quickSort(currentItems,seq);
-					currentItems=sortedItems;
+				var sacrifice = new Array();
+				for(var i=0;i<currentDisplayedItems.length;i++){
+					sacrifice[i]=currentDisplayedItems[i];
 				}
+				sortedItems=quickSort(sacrifice,seq);
 				showItems(sortedItems);
+				// Change the current displayed products and beforeDevidedItems.
+				currentDisplayedItems=sortedItems;
+				beforeDevidedItems=sortedItems;
+				
+				$("#allProducts").trigger("click");
 			});
 			
 			$("#clearBrands").click(function(){
@@ -492,7 +510,10 @@
 			});
 			
 			$("#6Products").click(function(){
-				
+				/*
+					1. Make it primary and disabled. Release others.
+					2. Trigger $("#page1").
+				*/
 				
 				$("#6Products").attr({"disabled":"disabled"});
 				$("#12Products").removeAttr("disabled");
@@ -502,14 +523,14 @@
 				$("#12Products").removeClass("btn-primary");
 				$("#allProducts").removeClass("btn-primary");
 				
-				if(currentItems.length>6){
+				/* if(currentDisplayedItems.length>6){
 					var sixItems=new Array();
 					for(var i=0;i<6;i++){
-						sixItems[i]=currentItems[i];
+						sixItems[i]=currentDisplayedItems[i];
 					}
 					showItems(sixItems);
 					groupItems=sixItems;
-				}
+				} */
 				$("#page1").trigger("click");
 				/* $("#applyBtn").trigger("click");
 				if($("#sort-by").val()!=""){
@@ -527,14 +548,6 @@
 				$("#6Products").removeClass("btn-primary");
 				$("#allProducts").removeClass("btn-primary");
 				
-				if(currentItems.length>12){
-					var tlvItems=new Array();
-					for(var i=0;i<12;i++){
-						tlvItems[i]=currentItems[i];
-					}
-					showItems(tlvItems);
-					groupItems=tlvItems;
-				}
 				$("#page1").trigger("click");
 			});
 			$("#allProducts").click(function(){	
@@ -548,7 +561,6 @@
 				$("#6Products").removeClass("btn-primary");
 				$("#12Products").removeClass("btn-primary");
 				
-				showItems(currentItems);
 				$("#page1").trigger("click");
 			});
 			
@@ -566,41 +578,44 @@
 				$("#page5").removeClass("active");
 				
 				if(!!$("#6Products").attr("class").match("btn-primary")){
-					if(currentItems.length>6){
+					if(beforeDevidedItems.length>6){
 						var sixItems=new Array();
 						for(var i=0;i<6;i++){
-							sixItems[i-0]=currentItems[i];
+							sixItems[i-0]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
-						groupItems=sixItems;
-					}else if(currentItems.length>0 && currentItems.length<=6){
+						currentDisplayedItems=sixItems;
+					}else if(beforeDevidedItems.length>0 && beforeDevidedItems.length<=6){
 						var sixItems=new Array();
-						for(var i=0;i<currentItems.length;i++){
-							sixItems[i-0]=currentItems[i];
+						for(var i=0;i<beforeDevidedItems.length;i++){
+							sixItems[i-0]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
-						groupItems=sixItems;
+						currentDisplayedItems=sixItems;
 					}
 				}else if(!!$("#12Products").attr("class").match("btn-primary")){
-					if(currentItems.length>12){
+					if(beforeDevidedItems.length>12){
 						var tlvItems=new Array();
 						for(var i=0;i<12;i++){
-							tlvItems[i-0]=currentItems[i];
+							tlvItems[i-0]=beforeDevidedItems[i];
 						}
 						showItems(tlvItems);
-						groupItems=tlvItems;
-					}else if(0<currentItems.length && currentItems.length<=12){
-						var sixItems=new Array();
-						for(var i=0;i<currentItems.length;i++){
-							sixItems[i-0]=currentItems[i];
+						currentDisplayedItems=tlvItems;
+					}else if(0<beforeDevidedItems.length && beforeDevidedItems.length<=12){
+						var tlvItems=new Array();
+						for(var i=0;i<beforeDevidedItems.length;i++){
+							tlvItems[i-0]=beforeDevidedItems[i];
 						}
-						showItems(sixItems);
-						groupItems=sixItems;
+						showItems(tlvItems);
+						currentDisplayedItems=tlvItems;
 					}else{
 						showItems(null);
+						currentDisplayedItems=null;
 					}
 				}else if(!!$("#allProducts").attr("class").match("btn-primary")){
-					showItems(currentItems);
+					showItems(beforeDevidedItems);
+					currentDisplayedItems=beforeDevidedItems;
+					
 				}else{
 					// If all 3 is not selected.
 					// Impossible.
@@ -620,43 +635,46 @@
 				$("#page4").removeAttr("disabled");
 				$("#page5").removeAttr("disabled");
 				if(!!$("#6Products").attr("class").match("btn-primary")){
-					if(currentItems.length>12){
+					if(beforeDevidedItems.length>12){
 						var sixItems=new Array();
 						for(var i=6;i<12;i++){
-							sixItems[i-6]=currentItems[i];
+							sixItems[i-6]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
-						groupItems=sixItems;
-					}else if(6<currentItems.length && currentItems.length<=12){
+						currentDisplayedItems=sixItems;
+					}else if(6<beforeDevidedItems.length && beforeDevidedItems.length<=12){
 						var sixItems=new Array();
-						for(var i=6;i<currentItems.length;i++){
-							sixItems[i-6]=currentItems[i];
+						for(var i=6;i<beforeDevidedItems.length;i++){
+							sixItems[i-6]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
-						groupItems=sixItems;
+						currentDisplayedItems=sixItems;
 					}else{
 						showItems(null);
+						currentDisplayedItems=null;
 					}
 				}else if(!!$("#12Products").attr("class").match("btn-primary")){
-					if(currentItems.length>24){
+					if(beforeDevidedItems.length>24){
 						var tlvItems=new Array();
 						for(var i=12;i<24;i++){
-							tlvItems[i-12]=currentItems[i];
+							tlvItems[i-12]=beforeDevidedItems[i];
 						}
 						showItems(tlvItems);
-						groupItems=tlvItems;
-					}else if(12<currentItems.length&&currentItems.length<=24){
+						currentDisplayedItems=tlvItems;
+					}else if(12<beforeDevidedItems.length&&beforeDevidedItems.length<=24){
 						var tlvItems=new Array();
-						for(var i=12;i<currentItems.length;i++){
-							tlvItems[i-12]=currentItems[i];
+						for(var i=12;i<beforeDevidedItems.length;i++){
+							tlvItems[i-12]=beforeDevidedItems[i];
 						}
 						showItems(tlvItems);
-						groupItems=tlvItems;
+						currentDisplayedItems=tlvItems;
 					}else{
 						showItems(null);
+						currentDisplayedItems=null;
 					}
 				}else if(!!$("#allProducts").attr("class").match("btn-primary")){
 					showItems(null);
+					currentDisplayedItems=null;
 				}else{
 					// If all 3 is not selected.
 					// Impossible.
@@ -677,38 +695,39 @@
 				$("#page5").removeAttr("disabled");
 				
 				if(!!$("#6Products").attr("class").match("btn-primary")){
-					if(currentItems.length>18){
+					if(beforeDevidedItems.length>18){
 						var sixItems=new Array();
 						for(var i=12;i<18;i++){
-							sixItems[i-12]=currentItems[i];
+							sixItems[i-12]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
-						groupItems=sixItems;
-					}else if(12<currentItems.length && currentItems.length<=18){
+						currentDisplayedItems=sixItems;
+					}else if(12<beforeDevidedItems.length && beforeDevidedItems.length<=18){
 						var sixItems=new Array();
-						for(var i=12;i<currentItems.length;i++){
-							sixItems[i-12]=currentItems[i];
+						for(var i=12;i<beforeDevidedItems.length;i++){
+							sixItems[i-12]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
-						groupItems=sixItems;
+						currentDisplayedItems=sixItems;
 					}else{
 						showItems(null);
+						currentDisplayedItems=null;
 					}
 				}else if(!!$("#12Products").attr("class").match("btn-primary")){
-					if(currentItems.length>36){
+					if(beforeDevidedItems.length>36){
 						var tlvItems=new Array();
 						for(var i=24;i<36;i++){
-							tlvItems[i-24]=currentItems[i];
+							tlvItems[i-24]=beforeDevidedItems[i];
 						}
 						showItems(tlvItems);
-						groupItems=tlvItems;
-					}else if(24<currentItems.length&&currentItems.length<=36){
+						currentDisplayedItems=tlvItems;
+					}else if(24<beforeDevidedItems.length&&beforeDevidedItems.length<=36){
 						var tlvItems=new Array();
-						for(var i=24;i<currentItems.length;i++){
-							tlvItems[i-24]=currentItems[i];
+						for(var i=24;i<beforeDevidedItems.length;i++){
+							tlvItems[i-24]=beforeDevidedItems[i];
 						}
 						showItems(tlvItems);
-						groupItems=tlvItems;
+						currentDisplayedItems=tlvItems;
 					}else{
 						showItems(null);
 					}
@@ -733,43 +752,46 @@
 				$("#page5").removeAttr("disabled");
 				
 				if(!!$("#6Products").attr("class").match("btn-primary")){
-					if(currentItems.length>24){
+					if(beforeDevidedItems.length>24){
 						var sixItems=new Array();
 						for(var i=18;i<24;i++){
-							sixItems[i-18]=currentItems[i];
+							sixItems[i-18]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
-						groupItems=sixItems;
-					}else if(18<currentItems.length && currentItems.length<=24){
+						currentDisplayedItems=sixItems;
+					}else if(18<beforeDevidedItems.length && beforeDevidedItems.length<=24){
 						var sixItems=new Array();
-						for(var i=18;i<currentItems.length;i++){
-							sixItems[i-18]=currentItems[i];
+						for(var i=18;i<beforeDevidedItems.length;i++){
+							sixItems[i-18]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
-						groupItems=sixItems;
+						currentDisplayedItems=sixItems;
 					}else{
 						showItems(null);
+						currentDisplayedItems=null;
 					}
 				}else if(!!$("#12Products").attr("class").match("btn-primary")){
-					if(currentItems.length>48){
+					if(beforeDevidedItems.length>48){
 						var tlvItems=new Array();
 						for(var i=36;i<48;i++){
-							tlvItems[i-36]=currentItems[i];
+							tlvItems[i-36]=beforeDevidedItems[i];
 						}
 						showItems(tlvItems);
-						groupItems=tlvItems;
-					}else if(36<currentItems.length&&currentItems.length<=48){
+						currentDisplayedItems=tlvItems;
+					}else if(36<beforeDevidedItems.length&&beforeDevidedItems.length<=48){
 						var tlvItems=new Array();
-						for(var i=36;i<currentItems.length;i++){
-							tlvItems[i-36]=currentItems[i];
+						for(var i=36;i<beforeDevidedItems.length;i++){
+							tlvItems[i-36]=beforeDevidedItems[i];
 						}
 						showItems(tlvItems);
-						groupItems=tlvItems;
+						currentDisplayedItems=tlvItems;
 					}else{
 						showItems(null);
+						currentDisplayedItems=null;
 					}
 				}else if(!!$("#allProducts").attr("class").match("btn-primary")){
 					showItems(null);
+					currentDisplayedItems=null;
 				}else{
 					// If all 3 is not selected.
 					// Impossible.
@@ -789,43 +811,46 @@
 				$("#page1").removeAttr("disabled");
 				
 				if(!!$("#6Products").attr("class").match("btn-primary")){
-					if(currentItems.length>6){
+					if(beforeDevidedItems.length>6){
 						var sixItems=new Array();
 						for(var i=24;i<30;i++){
-							sixItems[i-24]=currentItems[i];
+							sixItems[i-24]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
-						groupItems=sixItems;
-					}else if(24<currentItems.length && currentItems.length<=30){
+						currentDisplayedItems=sixItems;
+					}else if(24<beforeDevidedItems.length && beforeDevidedItems.length<=30){
 						var sixItems=new Array();
-						for(var i=24;i<currentItems.length;i++){
-							sixItems[i-24]=currentItems[i];
+						for(var i=24;i<beforeDevidedItems.length;i++){
+							sixItems[i-24]=beforeDevidedItems[i];
 						}
 						showItems(sixItems);
-						groupItems=sixItems;
+						currentDisplayedItems=sixItems;
 					}else{
 						showItems(null);
+						currentDisplayedItems=null;
 					}
 				}else if(!!$("#12Products").attr("class").match("btn-primary")){
-					if(currentItems.length>60){
+					if(beforeDevidedItems.length>60){
 						var tlvItems=new Array();
 						for(var i=48;i<60;i++){
-							tlvItems[i-48]=currentItems[i];
+							tlvItems[i-48]=beforeDevidedItems[i];
 						}
 						showItems(tlvItems);
-						groupItems=tlvItems;
-					}else if(48<currentItems.length&&currentItems.length<=60){
+						currentDisplayedItems=tlvItems;
+					}else if(48<beforeDevidedItems.length&&beforeDevidedItems.length<=60){
 						var tlvItems=new Array();
-						for(var i=48;i<currentItems.length;i++){
-							tlvItems[i-48]=currentItems[i];
+						for(var i=48;i<beforeDevidedItems.length;i++){
+							tlvItems[i-48]=beforeDevidedItems[i];
 						}
 						showItems(tlvItems);
-						groupItems=tlvItems;
+						currentDisplayedItems=tlvItems;
 					}else{
 						showItems(null);
+						currentDisplayedItems=null;
 					}
 				}else if(!!$("#allProducts").attr("class").match("btn-primary")){
 					showItems(null);
+					currentDisplayedItems=null;
 				}else{
 					// If all 3 is not selected.
 					// Impossible.
